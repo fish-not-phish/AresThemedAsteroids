@@ -7,8 +7,8 @@
 
 ### Ships and weapons
 #### 1. Elejeetian Cruiser
-##### - Onas
-##### - Elejeetian Laser
+##### * Onas
+##### * Elejeetian Laser
 #### 2. Gaitori Heavy Destroyer
 ##### - Neutron
 ##### - CMissile
