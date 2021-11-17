@@ -6,19 +6,22 @@
 #### Asteroids styled game inspired by Ares, a 1997 game developed by Nathan Lamont. All of the media, images and sprites are credited to Nathan Lamont. 
 
 ### Ships and weapons
-#### 1. Elejeetian Cruiser
-##### * Onas
-##### * Elejeetian Laser
-#### 2. Gaitori Heavy Destroyer
-##### - Neutron
-##### - CMissile
-##### - Gunshot
-#### 3. Ishiman Heavy Destroyer
-##### - Magneto
-##### - Lectro Laser
-#### 4. Obish Escort
-##### - PP
-##### - Obish Laser
+1. Elejeetian Cruiser
+   * Onas
+   * Elejeetian Laser
+
+2. Gaitori Heavy Destroyer
+   * Neutron
+   * CMissile
+   * Gunshot
+
+3. Ishiman Heavy Destroyer
+   * Magneto
+   * CMissile
+   * Lectro Laser
+4. Obish Escort
+   * PP
+   * Obish Laser
 
 ### Key Binds
 #### Using the arrow keys, you can accelerate with the UP arrow key, stop with the DOWN arrow key, turn left with the LEFT arrow key, and turn right with the RIGHT arrow key.
