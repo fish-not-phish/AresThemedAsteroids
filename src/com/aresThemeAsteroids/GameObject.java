@@ -64,7 +64,7 @@ public abstract class GameObject {
 		}
 	}
 	
-	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> deBris) {
+	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> deBris, ArrayList<Particles> particles) {
 		pos = pos.add(vel);
 		checkBounds();
 	}

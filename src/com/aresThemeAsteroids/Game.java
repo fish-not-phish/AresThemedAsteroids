@@ -14,6 +14,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -35,8 +36,8 @@ public class Game extends Canvas implements Runnable {
 //	Ship settings
 	public static final double ELE_SHIP_RADIUS = 17;
 	public static final double ESCORT_SHIP_RADIUS = 17;
-	public static final double GAI_HVD_SHIP_RADIUS = 20;
-	public static final double ISH_HVD_SHIP_RADIUS = 20;
+	public static final double GAI_HVD_SHIP_RADIUS = 22;
+	public static final double ISH_HVD_SHIP_RADIUS = 22;
 	
 	public static final double SHIP_MAX_VELOCITY = 4;
 	public static int SHIP_HEALTH = 20;
@@ -46,11 +47,11 @@ public class Game extends Canvas implements Runnable {
 	
 //	Asteroid settings
 	public static final double BIG_AST_RADIUS = 25;
-	public static int BIG_AST_HEALTH = 12;
+	public static int BIG_AST_HEALTH = 36;
 	public static final double MED_AST_RADIUS = 10;
-	public static int MED_AST_HEALTH = 5;
+	public static int MED_AST_HEALTH = 24;
 	public static final double SMALL_AST_RADIUS = 5;
-	public static int SMALL_AST_HEALTH = 2;
+	public static int SMALL_AST_HEALTH = 12;
 	
 	public static final int ASTEROID_HEALTH = 12;
 	public static final long ASTEROID_OVERLAY_DURATION = 100;
@@ -67,22 +68,59 @@ public class Game extends Canvas implements Runnable {
 	public static final double MISSILE_VELOCITY = 8;
 	public static final long MISSILE_DURATION = 1500;
 	public static final double MISSILE_RADIUS = 6;
+	public static final double MISSLE_MASS = 1;
 	
 	public static final double ANTI_RADIUS = 3;
+	public static final double ANTI_MASS = 0.4;
 	
 	public static final double ONAS_RADIUS = 3;
-	public static final double ONAS_VELOCITY = 6;
+	public static final double ONAS_VELOCITY = 11;
 	public static final long ONAS_DURATION = 1200;
+	public static final double ONAS_MASS = 1;
 	
-	public static final double NEUTRON_VELOCITY = 7;
+	public static final double NEUTRON_VELOCITY = 8;
 	public static final long NEUTRON_DURATION = 900;
 	public static final double NEUTRON_RADIUS = 9;
+	public static final double NEUTRON_MASS = 0.4;
 	
-	public static final double INASA_VELOCITY = 9;
-	public static final long INASA_DURATION = 1300;
-	public static final double INASA_RADIUS = 3;
+	public static final double LECTRO_VELOCITY = 13;
+	public static final long LECTRO_DURATION = 450;
+	public static final double LECTRO_RADIUS = 4;
+	public static final double LECTRO_MASS = 0.4;
 	
-	public static final double PROJECTILE_MAX_ROTATION = 0.03;
+	public static final double ELELASER_VELOCITY = 11;
+	public static final long ELELASER_DURATION = 450;
+	public static final double ELELASER_RADIUS = 4;
+	public static final double ELELASER_MASS = 0.4;
+	
+	public static final double MAGNETO_VELOCITY = 12;
+	public static final long MAGNETO_DURATION = 900;
+	public static final double MAGNETO_RADIUS = 9;
+	public static final double MAGNETO_MASS = 0.4;
+	
+	public static final double G_LASER_VELOCITY = 11;
+	public static final long G_LASER_DURATION = 500;
+	public static final double G_LASER_RADIUS = 4;
+	public static final double G_LASER_MASS = 0.4;
+	
+	public static final double INASA_VELOCITY = 11;
+	public static final long INASA_DURATION = 900;
+	public static final double INASA_RADIUS = 6;
+	public static final double INASA_MAS = 0.4;
+	
+	public static final double GUN_VELOCITY = 30;
+	public static final long GUN_DURATION = 100;
+	public static final double GUN_RADIUS = 1;
+	public static final double GUN_MASS = 0.2;
+	
+	public static final double FLAK_VELOCITY = 8;
+	public static final long FLAK_DURATION = 600;
+	public static final double FLAK_RADIUS = 2;
+	public static final double FLAK_MASS = 0.4;
+	
+	public static final long PARTICLE_DURATION = 250;
+	
+	public static final double PROJECTILE_MAX_ROTATION = 0.02;
 	
 //	Flak Drone settings
 	public static final double FLAK_DRONE_RADIUS = 15;
@@ -122,13 +160,22 @@ public class Game extends Canvas implements Runnable {
 	
 	public static Frames framesDebris = new Frames("debris");
 	
+	public static Frames framesParticle = new Frames("particle");
+	
 //	Weapon Sprites
 	public static Frames framesBullet = new Frames("bullet");
 	public static Frames framesMissile = new Frames("missle");
 	public static Frames framesNeutron = new Frames("neutron");
 	public static Frames framesAnti = new Frames("anti");
 	public static Frames framesOnas = new Frames("onas");
-	public static Frames framesInasa = new Frames("inasa");
+	public static Frames framesInasa = new Frames("greenPhoton");
+	public static Frames framesLectro = new Frames("lectro");
+	public static Frames framesMagneto = new Frames("magneto");
+	public static Frames framesGLaser = new Frames("greenLaser");
+	public static Frames framesFlak = new Frames("flakBullet");
+	public static Frames framesEleLaser = new Frames("eleLaser");
+	public static Frames framesGun = new Frames("gunfire");
+	public static Frames framesGunFire = new Frames("gunsmoke");
 	
 //	Explosions / hit markers
 	public static Frames framesMissileExplosion = new Frames("missileHit");
@@ -142,12 +189,23 @@ public class Game extends Canvas implements Runnable {
 	public static SoundEffect soundNeutronFire = new SoundEffect("neutron");
 	public static SoundEffect soundFlakFire = new SoundEffect("flakFireSound");
 	public static SoundEffect soundOnasFire = new SoundEffect("onasFire");
+	public static SoundEffect soundInasaFire = new SoundEffect("inasaFire");
+	public static SoundEffect soundLectroFire = new SoundEffect("lectroFire");
+	public static SoundEffect soundGLaserFire = new SoundEffect("greenLaserFire");
+	public static SoundEffect soundEleLaserFire = new SoundEffect("eleLaser");
+	public static SoundEffect soundGunshotFire = new SoundEffect("gunshotFire");
+	public static SoundEffect silence = new SoundEffect("silence");
+	
+//	ship  low health sound
+	public static final SoundEffect lowHealth = new SoundEffect("lowHealth");
 	
 	
 //	Weapon hit sound effect
 	public static SoundEffect soundAsteroidHit = new SoundEffect("astHit");
 	public static SoundEffect soundMissileHit = new SoundEffect("missleExplosion");
 	public static SoundEffect soundFlak = new SoundEffect("flak");
+	public static SoundEffect soundRicochet1 = new SoundEffect("ricochet1");
+	public static SoundEffect soundRicochet2 = new SoundEffect("ricochet2");
 	
 //	Explosion sound effect
 	public static SoundEffect soundAsteroidExplosion = new SoundEffect("astExplosion");
@@ -170,9 +228,10 @@ public class Game extends Canvas implements Runnable {
 	public static ArrayList<Ship>ships;
 	private ArrayList<Projectile> projectiles;
 	public static ArrayList<Asteroid> asteroids;
-	private ArrayList<ParticleEffect> particleEffects;
+	public static ArrayList<ParticleEffect> particleEffects;
 	private ArrayList<FlakDrone> flakDrones;
 	private ArrayList<Debris> debris;
+	private ArrayList<Particles> particles;
 	public static KeyInput input;
 	
 	private static Random rand = new Random();
@@ -195,7 +254,7 @@ public class Game extends Canvas implements Runnable {
 		
 		
 		initialize();
-		new Window("Asteroids - Ares v1.0", this);
+		new Window("Asteroids - Ares v1.2", this);
 	}
 	
 	public static BufferedImage getShipImage() {
@@ -254,19 +313,19 @@ public class Game extends Canvas implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File file2 = new File("./resources/sprites/splash.png");
+		File file2 = new File("./resources/sprites/ares-main.png");
 		try {
 			image2 = ImageIO.read(file2);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File file3 = new File("./resources/sprites/aresLeftUI.png");
+		File file3 = new File("./resources/sprites/aresLeftUI1.png");
 		try {
 			leftUI = ImageIO.read(file3);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		File file4 = new File("./resources/sprites/aresRightUI.png");
+		File file4 = new File("./resources/sprites/aresRightUI1.png");
 		try {
 			rightUI = ImageIO.read(file4);
 		} catch (IOException e) {
@@ -289,6 +348,7 @@ public class Game extends Canvas implements Runnable {
 		particleEffects = new ArrayList<ParticleEffect>();
 		flakDrones = new ArrayList<FlakDrone>();
 		debris = new ArrayList<Debris>();
+		particles = new ArrayList<Particles>();
 		
 		Ship player = ShipFactory.createEleCruiser(input.getKeys(), input.getProcessed(), framesShip, framesShipOverlay);
 		ships.add(player);
@@ -387,6 +447,55 @@ public class Game extends Canvas implements Runnable {
 		debris.add(deBris);
 	}
 	
+	public void addParticles(Projectile projectile) {
+		double angle = rand.nextDouble() * Math.PI * 2;
+		Vector2 direction1 = new Vector2(projectile.getRadius() * .5, 0).rot(angle);
+		Vector2 direction2 = direction1.rot(Math.PI);
+		Vector2 pos = projectile.getPos().add(direction1);
+		Vector2 velocity = new Vector2(-3, 3, -3, 3);
+		double radius = DEBRIS_RADIUS;
+		
+		Particles particle = new Particles(pos, velocity, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity = new Vector2(-3, 3, -3, 3);
+		
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity2 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity2, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity3 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity3, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity4 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity4, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity5 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity5, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity6 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity6, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity7 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity7, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity8 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity8, radius, PARTICLE_DURATION);
+		particles.add(particle);
+		
+		Vector2 otherVelocity9 = new Vector2(-3, 3, -3, 3);
+		particle = new Particles(projectile.getPos().add(direction2), otherVelocity9, radius, PARTICLE_DURATION);
+		particles.add(particle);
+	}
+	
 	private void CanvasSetup() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -475,6 +584,9 @@ public class Game extends Canvas implements Runnable {
 				for (FlakDrone flakDrone : flakDrones) {
 					flakDrone.draw(g);
 				}
+				for (Particles particle : particles) {
+					particle.draw(g);
+				}
 				if (ships.isEmpty()) {
 					drawLose(g);
 				}
@@ -500,6 +612,12 @@ public class Game extends Canvas implements Runnable {
 		g2.drawImage(Game.miniMenu, Game.WIDTH / 3 + 50, Game.HEIGHT / 2 - 75, Game.WIDTH / 3, Game.HEIGHT / 4, null);
 	}
 	
+	private void tookDamage(Graphics g) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, WIDTH, HEIGHT);
+	}
+	
 	private void drawPause(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Game.miniMenu, Game.WIDTH / 3 + 50, Game.HEIGHT / 2 - 75, Game.WIDTH / 3, Game.HEIGHT / 4, null);
@@ -508,13 +626,16 @@ public class Game extends Canvas implements Runnable {
 	
 	private void drawHealthBar(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.gray);
-		g2.fillRect(WIDTH - (WIDTH / 50) + 7, HEIGHT / 2 - 181, 10, 130);
 		
 		g2.setColor(Color.red);
 		if (!ships.isEmpty()) {
-			g2.fillRect(WIDTH - (WIDTH / 50) + 7, HEIGHT / 2 - 181, 10, ships.get(0).getHealth() * 6 + 10);
+			final int w = 10;
+			final int h = ships.get(0).getHealth() * 6 + 10;
+			final int x = WIDTH - (WIDTH / 50) + 7;
+			final int y = (HEIGHT / 2 - 181) + (130 - h);
+			g2.fillRect(x, y, w, h);
 		}
+		
 	}
 
 	private void drawLeftUI(Graphics g) {
@@ -540,19 +661,17 @@ public class Game extends Canvas implements Runnable {
 	private void remove() {
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile projectile = projectiles.get(i);
-			if (!projectile.isAlive() && projectile.getOwner() == FlakDrone.class) {
+			if (!projectile.isAlive() && projectile.getOwner() == FlakDrone.class && projectile.getFrame() == framesFlak) {
 				projectiles.remove(projectile);
 				projectile.getHitSound().play();
 				i--;
-				ParticleEffect impact = new ParticleEffect(projectile.getPos(), projectile.getRadius(), projectile.getHitFrame(), FRAME_TIME, EXPLOSION_DURATION);
+				ParticleEffect impact = new ParticleEffect(projectile.getPos(), projectile.getRadius(), projectile.getHitFrame(), FRAME_TIME, 400);
 				particleEffects.add(impact);
+//				System.out.println(particleEffects.size());
 				addDebris(projectile);
 			} else if (!projectile.isAlive()) {
 				projectiles.remove(projectile);
-				projectile.getHitSound().play();
 				i--;
-				ParticleEffect impact = new ParticleEffect(projectile.getPos(), projectile.getRadius(), projectile.getHitFrame(), FRAME_TIME, EXPLOSION_DURATION);
-				particleEffects.add(impact);
 			}
 		}
 		for (int i = 0; i < ships.size(); i++) {
@@ -588,6 +707,13 @@ public class Game extends Canvas implements Runnable {
 				i--;
 			}
 		}
+		for (int i = 0; i < particles.size(); i++) {
+			Particles particle = particles.get(i);
+			if (!particle.isAlive()) {
+				particles.remove(particle);
+				i--;
+			}
+		}
 		for (int i = 0; i < flakDrones.size(); i++) {
 			FlakDrone flakDrone = flakDrones.get(i);
 			if (!flakDrone.isAlive()) {
@@ -603,22 +729,25 @@ public class Game extends Canvas implements Runnable {
 	private void update() {
 		if (State == STATE.GAME) {
 			for (FlakDrone flakDrone : flakDrones) {
-				flakDrone.update(ships, projectiles, asteroids, flakDrones, debris);
+				flakDrone.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
 			for (Debris flakDebris : debris) {
-				flakDebris.update(ships, projectiles, asteroids, flakDrones, debris);
+				flakDebris.update(ships, projectiles, asteroids, flakDrones, debris, particles);
+			}
+			for (Particles particle : particles) {
+				particle.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
 			for (Ship ship : ships) {
-				ship.update(ships, projectiles, asteroids, flakDrones, debris);
+				ship.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
 			for (Projectile projectile : projectiles) {
-				projectile.update(ships, projectiles, asteroids, flakDrones, debris);
+				projectile.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
 			for (ParticleEffect particleEffect : particleEffects) {
-				particleEffect.update(ships, projectiles, asteroids, flakDrones, debris);
+				particleEffect.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
 			for (Asteroid asteroid : asteroids) {
-				asteroid.update(ships, projectiles, asteroids, flakDrones, debris);
+				asteroid.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
 		}
 
@@ -646,17 +775,25 @@ public class Game extends Canvas implements Runnable {
 		for (Projectile projectile : projectiles) {
 			for (Asteroid asteroid : asteroids) {
 				if (asteroid.isColliding(projectile)) {
+//					System.out.println(particleEffects.size());
 					asteroid.resolveCollision(projectile);
+					if (projectile.isLaser()) {
+						addParticles(projectile);
+					}
 				}
 			}
 			for (FlakDrone flakDrone : flakDrones) {	
 				if (projectile.isColliding(flakDrone)) {
 					flakDrone.resolveCollision(projectile);
+					if (projectile.isLaser()) {
+						addParticles(projectile);
+					}
 				}
 			}
 			for (Ship ship : ships) {
 				if (ship.isColliding(projectile)) {					
 					ship.resolveCollision(projectile);
+					
 				}
 			}
 		}

@@ -15,6 +15,7 @@ import tools.SoundTools;
 
 public class SoundEffect {
 	private File sound;
+	InputStream myAudio;
 	
 	public SoundEffect(String name) {
 		String wav = "./resources/sounds/" + name + ".wav";
@@ -23,6 +24,10 @@ public class SoundEffect {
 	
 	public void play() {
 		SoundTools.playSound(sound);
+	}
+	
+	public void playInterval() throws IOException, LineUnavailableException {
+		SoundTools.playSoundInterval(sound);
 	}
 	
 	public void playCont() throws IOException, UnsupportedAudioFileException {

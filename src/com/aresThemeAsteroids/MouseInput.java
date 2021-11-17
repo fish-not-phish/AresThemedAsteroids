@@ -24,26 +24,26 @@ public class MouseInput implements MouseListener {
 		
 		if (Game.State == Game.STATE.MENU) {
 //			play
-			if (mx >= Game.WIDTH / 3 + 150 && mx <= Game.WIDTH / 3 + 350) {
-				if (my >= 150 && my <= 200) {
+			if (mx >= 500 && mx <= 1300) {
+				if (my >= 515 && my <= 565) {
 					Game.State = Game.STATE.GAME;
 				}
 			}
 //			settings
-			if (mx >= Game.WIDTH / 3 + 150 && mx <= Game.WIDTH / 3 + 350) {
-				if (my >= 250 && my <= 300) {
+			if (mx >= 500 && mx <= 1300) {
+				if (my >= 575 && my <= 625) {
 					Game.State = Game.STATE.SETTINGS;
 				}
 			}
 //			choose ship
-			if (mx >= Game.WIDTH / 3 + 125 && mx <= Game.WIDTH / 3 + 375) {
-				if (my >= 350 && my <= 400) {
+			if (mx >= 500 && mx <= 1300) {
+				if (my >= 635 && my <= 685) {
 					Game.State = Game.STATE.CHOOSE_SHIP;
 				}
 			}
 //			quit
-			if (mx >= Game.WIDTH / 3 + 150 && mx <= Game.WIDTH / 3 + 350) {
-				if (my >= 450 && my <= 500) {
+			if (mx >= 500 && mx <= 1300) {
+				if (my >= 695 && my <= 745) {
 					System.exit(1);
 					
 				}
@@ -52,64 +52,64 @@ public class MouseInput implements MouseListener {
 		
 		if (Game.State == Game.STATE.SETTINGS) {
 //			player add hp
-			if (mx >= Game.WIDTH / 3 + 500 && mx <= Game.WIDTH / 3 + 550) {
-				if (my >= 150 && my <= 200) {
+			if (mx >= 1250 && mx <= 1300) {
+				if (my >= 515 && my <= 565) {
 					Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
 				}
 			}
 //			player minus hp
-			if (mx >= Game.WIDTH / 3 - 75 && mx <= Game.WIDTH / 3 - 25) {
-				if (my >= 150 && my <= 200) {
+			if (mx >= 500 && mx <= 550) {
+				if (my >= 515 && my <= 565) {
 					Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
 				}
 			}
 //			big ast add hp
-			if (mx >= Game.WIDTH / 3 + 500 && mx <= Game.WIDTH / 3 + 550) {
-				if (my >= 250 && my <= 300) {
+			if (mx >= 1250 && mx <= 1300) {
+				if (my >= 575 && my <= 625) {
 					Game.BIG_AST_HEALTH += 1;
 				}
 			}
 //			big ast minus hp
-			if (mx >= Game.WIDTH / 3 - 75 && mx <= Game.WIDTH / 3 - 25) {
-				if (my >= 250 && my <= 300) {
+			if (mx >= 500 && mx <= 550) {
+				if (my >= 575 && my <= 625) {
 					Game.BIG_AST_HEALTH -= 1;
 				}
 			}
 //			med ast add hp
-			if (mx >= Game.WIDTH / 3 + 500 && mx <= Game.WIDTH / 3 + 550) {
-				if (my >= 350 && my <= 400) {
+			if (mx >= 1250 && mx <= 1300) {
+				if (my >= 635 && my <= 685) {
 					Game.MED_AST_HEALTH += 1;
 				}
 			}
 //			med ast minus hp
-			if (mx >= Game.WIDTH / 3 - 75 && mx <= Game.WIDTH / 3 - 25) {
-				if (my >= 350 && my <= 400) {
+			if (mx >= 500 && mx <= 550) {
+				if (my >= 635 && my <= 685) {
 					Game.MED_AST_HEALTH -= 1;
 				}
 			}
 //			small ast add hp
-			if (mx >= Game.WIDTH / 3 + 500 && mx <= Game.WIDTH / 3 + 550) {
-				if (my >= 450 && my <= 500) {
+			if (mx >= 1250 && mx <= 1300) {
+				if (my >= 695 && my <= 745) {
 					Game.SMALL_AST_HEALTH += 1;
 				}
 			}
 //			small ast minus hp
-			if (mx >= Game.WIDTH / 3 - 75 && mx <= Game.WIDTH / 3 - 25) {
-				if (my >= 450 && my <= 500) {
+			if (mx >= 500 && mx <= 550) {
+				if (my >= 695 && my <= 745) {
 					Game.SMALL_AST_HEALTH -= 1;
 				}
 			}
 //			back button
-			if (mx >= Game.WIDTH / 3 + 150 && mx <= Game.WIDTH / 3 + 350) {
-				if (my >= 600 && my <= 650) {
+			if (mx >= 500 && mx <= 1300) {
+				if (my >= 755 && my <= 800) {
 					Game.State = Game.STATE.MENU;
 				}
 			}
 		}
 		if (Game.State == Game.STATE.CHOOSE_SHIP) {
 //			next ship
-			if (mx >= Game.WIDTH / 3 + 500 && mx <= Game.WIDTH / 3 + 550) {
-				if (my >= 150 && my <= 200) {
+			if (mx >= 1250 && mx <= 1300) {
+				if (my >= 515 && my <= 565) {
 					i++;
 					if (i <= 3) {
 						if (i == 0) {
@@ -138,8 +138,8 @@ public class MouseInput implements MouseListener {
 				}
 			}
 //			previous ship
-			if (mx >= Game.WIDTH / 3 - 75 && mx <= Game.WIDTH / 3 - 25) {
-				if (my >= 150 && my <= 200) {
+			if (mx >= 500 && mx <= 550) {
+				if (my >= 515 && my <= 565) {
 					i--;
 					if (i < 0) {
 						i = 0;
@@ -168,8 +168,8 @@ public class MouseInput implements MouseListener {
 			}
 			
 //			back button
-			if (mx >= Game.WIDTH / 3 + 150 && mx <= Game.WIDTH / 3 + 350) {
-				if (my >= 600 && my <= 650) {
+			if (mx >= 500 && mx <= 1300) {
+				if (my >= 800 && my <= 850) {
 					Game.State = Game.STATE.MENU;
 				}
 			}

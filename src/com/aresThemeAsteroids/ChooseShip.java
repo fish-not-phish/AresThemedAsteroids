@@ -8,18 +8,20 @@ import java.awt.Rectangle;
 public class ChooseShip {
 
 //	add png of current ship image below current ship rectangle (if possible)
-	public Rectangle currentShip = new Rectangle(Game.WIDTH / 3 + 75, 150, 350, 50);
-	public Rectangle nextShip = new Rectangle(Game.WIDTH / 3 + 500, 150, 50, 50);
-	public Rectangle previousShip = new Rectangle(Game.WIDTH / 3 - 75, 150, 50, 50);
-	public Rectangle backButton = new Rectangle(Game.WIDTH / 3 + 150, 600, 200, 50);
+	public Rectangle currentShip = new Rectangle(Game.WIDTH / 3 + 130, 515, 350, 50);
+	public Rectangle nextShip = new Rectangle(Game.WIDTH / 3 + 650, 515, 50, 50);
+	public Rectangle previousShip = new Rectangle(Game.WIDTH / 3 - 100, 515, 50, 50);
+	public Rectangle backButton = new Rectangle(Game.WIDTH / 3 - 100, 800, 800, 50);
 	
 	public void draw (Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		
+		g.setColor(Color.black);
+		g.fillRect(Game.WIDTH / 3 - 100, 515, 800, 450);
+		
 		Font fnt0 = new Font("arial", Font.BOLD, 50);
 		g.setFont(fnt0);
-		g.setColor(Color.white);
-		g.drawString("Settings", Game.WIDTH / 3 + 145, 100);
+		g.setColor(Color.green);
 		
 		Font fnt1 = new Font("arial", Font.BOLD, 35);
 		g.setFont(fnt1);
@@ -31,10 +33,9 @@ public class ChooseShip {
 		g.drawString("<", previousShip.x + 15, previousShip.y + 35);
 		g2d.draw(previousShip);
 		
-		g.drawImage(Game.getShipImage(), Game.WIDTH / 3 + 150, 250, 200, 100, null, null);
+		g.drawImage(Game.getShipImage(), Game.WIDTH / 3 + 205, 575, 200, 100, null, null);
 		
-		
-		g.drawString("Back", backButton.x + 60, backButton.y + 40);
+		g.drawString("Back", backButton.x + 350, backButton.y + 40);
 		g2d.draw(backButton);
 	}
 }

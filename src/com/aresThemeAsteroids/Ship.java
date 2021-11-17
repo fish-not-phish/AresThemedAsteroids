@@ -10,8 +10,10 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
+import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import tools.DrawTools;
@@ -29,6 +31,27 @@ public class Ship extends GameObject {
 	private Sprite hitSprite;
 	private Frames hitFrame;
 	private String name;
+	private int ricochet = 0;
+	
+//	fire rates
+	private long missleFireRate;
+	private long missleLastFired;
+	private long onasFireRate;
+	private long onasLastFired;
+	private long inasaFireRate;
+	private long inasaLastFired;
+	private long gLaserFireRate;
+	private long gLaserLastFired;
+	private long neutronFireRate;
+	private long neutronLastFired;
+	private long magnetoFireRate;
+	private long magnetoLastFired;
+	private long lectroFireRate;
+	private long lectroLastFired;
+	private long eleLaserFireRate;
+	private long eleLaserLastFired;
+	private long gunshotFireRate;
+	private long gunshotLastFired;
 	
 	public Ship(Set<Integer> keys, Set<Integer> processed, double radius, Frames frame, Frames overlay, int health, String name) {
 		super(new Vector2 (Game.WIDTH / 2, Game.HEIGHT / 2), Vector2.zero(), radius, Color.white, frame, Game.FRAME_TIME);
@@ -43,6 +66,25 @@ public class Ship extends GameObject {
 		this.hitFrame = overlay;
 		hitSprite = new Sprite(hitFrame, Game.FRAME_TIME, sprite.getStartFrame());
 		lastHitTime = 0;
+		this.missleFireRate = 1075;
+		this.missleLastFired = 0;
+		this.onasFireRate = 225;
+		this.onasLastFired = 0;
+		this.inasaFireRate = 275;
+		this.inasaLastFired = 0;
+		this.gLaserFireRate = 275;
+		this.gLaserLastFired = 0;
+		this.neutronFireRate = 200;
+		this.neutronLastFired = 0;
+		this.magnetoFireRate = 175;
+		this.magnetoLastFired = 0;
+		this.lectroFireRate = 150;
+		this.lectroLastFired = 0;
+		this.eleLaserFireRate = 375;
+		this.eleLaserLastFired = 0;
+		this.gunshotFireRate = 75;
+		this.gunshotLastFired = 0;
+		
 		this.lastFired = System.currentTimeMillis();
 	}
 
@@ -61,9 +103,19 @@ public class Ship extends GameObject {
 		}
 	}
 	
+	public void fire(ArrayList<Projectile> projectiles) {
+		if (System.currentTimeMillis() - lastFired > fireRate) {
+			for (int i = 0; i < 4; i++) {
+				
+//				spawnProjectile(projectiles);
+			}
+			lastFired = System.currentTimeMillis();
+		}
+	}
 	
-	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> debris) {
-		super.update(ships, projectiles, asteroids, flakDrones, debris);
+	
+	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> debris, ArrayList<Particles> particles) {
+		super.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 
 		for (Integer code : keys) {
 			if (code == KeyEvent.VK_UP) {
@@ -71,6 +123,7 @@ public class Ship extends GameObject {
 				if (vel.length() > Game.SHIP_MAX_VELOCITY) {
 					vel = vel.unit().mul(Game.SHIP_MAX_VELOCITY);
 				}
+//				System.out.println("Vector is: " + vel.length());
 			}
 			if (code == KeyEvent.VK_RIGHT) {
 				
@@ -80,63 +133,147 @@ public class Ship extends GameObject {
 				
 				direction = direction.rot(-Game.SHIP_ROTATION);
 			}
+			if (code == KeyEvent.VK_DOWN) {
+//				if (vel.length() > 0) {
+//					vel = vel.sub(direction);
+//					System.out.println("Vector is: " + vel.length());
+//				} else {
+					vel = Vector2.zero();
+//				}
+//				if (vel.length() > Game.SHIP_MAX_VELOCITY) {
+//					vel = vel.unit().mul(Game.SHIP_MAX_VELOCITY);
+//				}
+			}
 		}
 		if (this.getName() == "Ele Cruiser") {
-			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
-		        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createOnas(projectilePos, direction.mul(Game.ONAS_VELOCITY), Game.ONAS_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_SPACE);
+			if (keys.contains(KeyEvent.VK_SPACE)) {
+				if (System.currentTimeMillis() - onasLastFired > onasFireRate) {
+			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createOnas(projectilePos, direction.mul(Game.ONAS_VELOCITY), Game.ONAS_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					onasLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SPACE);
 			}
+			
+			if (keys.contains(KeyEvent.VK_SHIFT)) {
+				if (System.currentTimeMillis() - eleLaserLastFired > eleLaserFireRate) {
+			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createEleLaser(projectilePos, direction.mul(Game.ELELASER_VELOCITY), Game.ELELASER_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					eleLaserLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SPACE);
+			}
+			
 		} else if (this.getName() == "Escort") {
 			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
-		        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createInasa(projectilePos, direction.mul(Game.INASA_VELOCITY), Game.INASA_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_SPACE);
+				if (System.currentTimeMillis() - inasaLastFired > inasaFireRate) {
+			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createInasa(projectilePos, direction.mul(Game.INASA_VELOCITY), Game.INASA_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					inasaLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SPACE);
+			}
+			
+			if (keys.contains(KeyEvent.VK_SHIFT) && !processed.contains(KeyEvent.VK_SHIFT)) {
+				if (System.currentTimeMillis() - gLaserLastFired > gLaserFireRate) {
+					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createGLaser(projectilePos, direction.mul(Game.G_LASER_VELOCITY), Game.G_LASER_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					gLaserLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SHIFT);
 			}
 		} else if (this.getName() == "Gai HVD") {			
+			if (keys.contains(KeyEvent.VK_C) && !processed.contains(KeyEvent.VK_C)) {
+				if (System.currentTimeMillis() - missleLastFired > missleFireRate) {
+//					Vector2 tempPos = new Vector2(pos.getX() + 20, pos.getY());
+					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY), Game.MISSILE_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					missleLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SHIFT);
+			}
+			
 			if (keys.contains(KeyEvent.VK_SHIFT) && !processed.contains(KeyEvent.VK_SHIFT)) {
-				Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY), Game.MISSILE_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_SHIFT);
+				if (System.currentTimeMillis() - gunshotLastFired > gunshotFireRate) {
+					Vector2 projectilePos = pos.add(direction.mul((sprite.getFrame().getHeight() / 2)  + 10));
+					if (ricochet == 0) {
+						Projectile p = ProjectileFactory.createGunshot1(projectilePos, direction.mul(Game.GUN_VELOCITY), Game.GUN_DURATION, this.getClass());
+						Projectile p1 = ProjectileFactory.createGunsmoke1(projectilePos, direction.mul(0.1), 1, this.getClass());
+						projectiles.add(p);
+						projectiles.add(p1);
+						p.getFireSound().play();
+					} else {
+						Projectile p = ProjectileFactory.createGunshot2(projectilePos, direction.mul(Game.GUN_VELOCITY), Game.GUN_DURATION, this.getClass());
+						Projectile p1 = ProjectileFactory.createGunsmoke2(projectilePos, direction.mul(1), 1, this.getClass());
+						projectiles.add(p);
+						projectiles.add(p1);
+						p.getFireSound().play();
+					}
+//					Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY), Game.NEUTRON_DURATION, this.getClass());
+					gunshotLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SPACE);
 			}
 			
 			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
-				Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY), Game.NEUTRON_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_SPACE);
+				if (System.currentTimeMillis() - neutronLastFired > neutronFireRate) {
+					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY), Game.NEUTRON_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					neutronLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SPACE);
 			}
 		} else if (this.getName() == "Ish HVD") {
 			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
-		        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createBullet(projectilePos, direction.mul(Game.BULLET_VELOCITY), Game.BULLET_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_SPACE);
+				if (System.currentTimeMillis() - magnetoLastFired > magnetoFireRate) {
+			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createMagneto(projectilePos, direction.mul(Game.MAGNETO_VELOCITY), Game.MAGNETO_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					magnetoLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SPACE);
 			}
 			
 			if (keys.contains(KeyEvent.VK_C) && !processed.contains(KeyEvent.VK_C)) {
-				Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY), Game.MISSILE_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_C);
+				if (System.currentTimeMillis() - missleLastFired > missleFireRate) {
+					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY), Game.MISSILE_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					missleLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_C);
 			}
 			
 			if (keys.contains(KeyEvent.VK_SHIFT) && !processed.contains(KeyEvent.VK_SHIFT)) {
-				Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-				Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY), Game.NEUTRON_DURATION, this.getClass());
-				projectiles.add(p);
-				p.getFireSound().play();
-				processed.add(KeyEvent.VK_SHIFT);
+				if (System.currentTimeMillis() - lectroLastFired > lectroFireRate) {
+					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
+					Projectile p = ProjectileFactory.createLectro(projectilePos, direction.mul(Game.LECTRO_VELOCITY), Game.LECTRO_DURATION, this.getClass());
+					projectiles.add(p);
+					p.getFireSound().play();
+					lectroLastFired = System.currentTimeMillis();
+				}
+//				processed.add(KeyEvent.VK_SHIFT);
 			}
+		}
+	}
+	
+	public void lowHealth() throws IOException, LineUnavailableException {
+		if (getHealth() <= 8) {
+			Game.lowHealth.playInterval();
 		}
 	}
 	
@@ -145,8 +282,19 @@ public class Ship extends GameObject {
 			lastHitTime = System.currentTimeMillis();
 			Projectile p = (Projectile) other;
 			p.getHitSound().play();
+			ParticleEffect impact = new ParticleEffect(p.getPos(), p.getRadius(), p.getHitFrame(), Game.FRAME_TIME, Game.EXPLOSION_DURATION);
+			Game.particleEffects.add(impact);
 			health -= p.getDamage();
 			p.setAlive(false);
+//			try {
+//				lowHealth();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (LineUnavailableException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 		if (other instanceof Asteroid) {
 			GameObject.changePositions(this, other);
@@ -154,6 +302,15 @@ public class Ship extends GameObject {
 			this.vel = vel.mul(0.25);
 			lastHitTime = System.currentTimeMillis();
 			health -= 1;
+//			try {
+//				lowHealth();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (LineUnavailableException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 	}
 	

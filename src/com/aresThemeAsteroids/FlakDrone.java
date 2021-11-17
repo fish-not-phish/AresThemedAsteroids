@@ -21,7 +21,7 @@ public class FlakDrone extends GameObject {
 	public FlakDrone (Vector2 pos, Vector2 vel, double radius) {
 		super(pos, vel, radius, Color.gray, Game.framesFlakDrone, Game.FRAME_TIME);
 		this.lastFired = System.currentTimeMillis();
-		this.fireRate = 300;
+		this.fireRate = 425;
 		isActive = false;
 		health = Game.FLAK_DRONE_HEALTH;
 		hitSprite = new Sprite(Game.framesFlakDroneOverlay, Game.FRAME_TIME, sprite.getStartFrame());
@@ -42,8 +42,8 @@ public class FlakDrone extends GameObject {
 		}
 	}
 	
-	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> debris) {
-		super.update(ships, projectiles, asteroids, flakDrones, debris);
+	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> debris, ArrayList<Particles> particles) {
+		super.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 		if (!ships.isEmpty()) {
 			if (this.isInRange(ships.get(0))) {
 				this.fire(projectiles);
@@ -64,15 +64,15 @@ public class FlakDrone extends GameObject {
 		Projectile p = null;
 		if (projectile == 0) {
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
-			p = ProjectileFactory.createAnti(pos, vel, 500, this.getClass());
+			p = ProjectileFactory.createFlak(pos, vel, 500, this.getClass());
 			p.getFireSound().play();
 		} else if (projectile == 1){
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
-			p = ProjectileFactory.createAnti(pos, vel, 500, this.getClass());
+			p = ProjectileFactory.createFlak(pos, vel, 750, this.getClass());
 			p.getFireSound().play();
 		} else if (projectile == 2) {
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
-			p = ProjectileFactory.createAnti(pos, vel, 500, this.getClass());
+			p = ProjectileFactory.createMissle(pos, vel, Game.MISSILE_DURATION, this.getClass());
 			p.getFireSound().play();
 		} 
 		
@@ -84,6 +84,8 @@ public class FlakDrone extends GameObject {
 			lastHitTime = System.currentTimeMillis();
 			Projectile p = (Projectile) other;
 			p.getHitSound().play();
+			ParticleEffect impact = new ParticleEffect(p.getPos(), p.getRadius(), p.getHitFrame(), Game.FRAME_TIME, Game.EXPLOSION_DURATION);
+			Game.particleEffects.add(impact);
 			health -= p.getDamage();
 			p.setAlive(false);
 		}
