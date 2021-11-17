@@ -7,18 +7,18 @@
 
 ### Ships and weapons
 #### 1. Elejeetian Cruiser
-##### -Onas
-##### -Elejeetian Laser
+##### - Onas
+##### - Elejeetian Laser
 #### 2. Gaitori Heavy Destroyer
-##### -Neutron
-##### -CMissile
-##### -Gunshot
+##### - Neutron
+##### - CMissile
+##### - Gunshot
 #### 3. Ishiman Heavy Destroyer
-##### -Magneto
-##### -Lectro Laser
+##### - Magneto
+##### - Lectro Laser
 #### 4. Obish Escort
-##### -PP
-##### -Obish Laser
+##### - PP
+##### - Obish Laser
 
 ### Key Binds
 #### Using the arrow keys, you can accelerate with the UP arrow key, stop with the DOWN arrow key, turn left with the LEFT arrow key, and turn right with the RIGHT arrow key.
