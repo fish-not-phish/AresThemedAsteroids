@@ -1,6 +1,6 @@
 # AresThemedAsteroids
-######1997 Ares Themed Asteroids Style Game
-######All media is accredited to Nathan Lamont, creator/developer of Ares.
+###### 1997 Ares Themed Asteroids Style Game
+###### All media is accredited to Nathan Lamont, creator/developer of Ares.
 
 ### Short description
 #### Asteroids styled game inspired by Ares, a 1997 game developed by Nathan Lamont. All of the media, images and sprites are credited to Nathan Lamont. 
