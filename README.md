@@ -6,17 +6,17 @@
 #### Asteroids styled game inspired by Ares, a 1997 game developed by Nathan Lamont. All of the media, images and sprites are credited to Nathan Lamont. 
 
 ### Ships and weapons
-#### *Elejeetian Cruiser
+#### 1. Elejeetian Cruiser
 ##### -Onas
 ##### -Elejeetian Laser
-#### *Gaitori Heavy Destroyer
+#### 2. Gaitori Heavy Destroyer
 ##### -Neutron
 ##### -CMissile
 ##### -Gunshot
-#### *Ishiman Heavy Destroyer
+#### 3. Ishiman Heavy Destroyer
 ##### -Magneto
 ##### -Lectro Laser
-#### *Obish Escort
+#### 4. Obish Escort
 ##### -PP
 ##### -Obish Laser
 
