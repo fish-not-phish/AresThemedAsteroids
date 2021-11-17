@@ -30,8 +30,20 @@ public class Asteroid extends GameObject {
 		}
 		if (other instanceof Projectile) {
 			lastHitTime = System.currentTimeMillis();
+			GameObject.changeVelocities(this, other, 1);
 			Projectile p = (Projectile) other;
 			p.getHitSound().play();
+			ParticleEffect impact;
+			if (p.isHoming()) {
+				impact = new ParticleEffect(p.getPos(), p.getRadius(), p.getHitFrame(), Game.FRAME_TIME, 1000);
+			}
+			else if (p.isLaser()) {
+				impact = new ParticleEffect(p.getPos(), p.getRadius(), p.getHitFrame(), Game.FRAME_TIME, 0);
+			}
+			else {
+				impact = new ParticleEffect(p.getPos(), p.getRadius(), p.getHitFrame(), Game.FRAME_TIME, 400);
+			}
+			Game.particleEffects.add(impact);
 			health -= p.getDamage();
 			p.setAlive(false);
 		}
