@@ -1,0 +1,9 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com.aresThemeAsteroids.Game'
+
+jar {
+    archiveBaseName = 'AresThemedAsteroids'
+    archiveVersion = '1.0.0'
+}
