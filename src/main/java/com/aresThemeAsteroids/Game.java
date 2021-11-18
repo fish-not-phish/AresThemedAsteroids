@@ -15,22 +15,19 @@ import java.util.Random;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
-
 import javax.imageio.ImageIO;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import tools.Vector2;
 
 public class Game extends Canvas implements Runnable {
 
 //	Main game settings
-	public static final int WIDTH = 1800;
+	public static int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
 	public static final int HEIGHT = WIDTH * 9 / 16; // aspect ratio
 	public static final long FRAME_TIME = 100;
 	private Menu menu;
 	private Settings settings;
 	private ChooseShip chooseShip;
-
 	public static final int UI_WIDTH = WIDTH / 10;
 	
 //	Ship settings
@@ -124,7 +121,7 @@ public class Game extends Canvas implements Runnable {
 	
 //	Flak Drone settings
 	public static final double FLAK_DRONE_RADIUS = 15;
-	public static final int FLAK_DRONE_HEALTH = 60;
+	public static final int FLAK_DRONE_HEALTH = 120;
 	
 //	Misc settings
 	public static final long EXPLOSION_DURATION = 1000;
@@ -151,9 +148,6 @@ public class Game extends Canvas implements Runnable {
 	
 	public static Frames framesIshHvdShip = new Frames("ishHvdShip");
 	public static Frames framesIshHvdShipOverlay = new Frames("ishHvdShipOverlay");
-//	
-	
-	
 	
 	public static Frames framesFlakDrone = new Frames("flakDrone");
 	public static Frames framesFlakDroneOverlay = new Frames("flakDroneOverlay");
@@ -199,7 +193,6 @@ public class Game extends Canvas implements Runnable {
 //	ship  low health sound
 	public static final SoundEffect lowHealth = new SoundEffect("lowHealth");
 	
-	
 //	Weapon hit sound effect
 	public static SoundEffect soundAsteroidHit = new SoundEffect("astHit");
 	public static SoundEffect soundMissileHit = new SoundEffect("missleExplosion");
@@ -213,7 +206,6 @@ public class Game extends Canvas implements Runnable {
 //	Music
 	public static SoundEffect music = new SoundEffect("aresMix");
 
-	
 	public static long startTime = System.currentTimeMillis();
 	public boolean running = false;
 	public Thread gameThread;
@@ -247,12 +239,13 @@ public class Game extends Canvas implements Runnable {
 	public static STATE State = STATE.MENU;
 	
 	public Game() {
+		if (WIDTH > 1920) {
+			WIDTH = 1920;
+		}
 		CanvasSetup();
 		input = new KeyInput();
 		this.addKeyListener(input);
 		this.setFocusable(true);
-		
-		
 		initialize();
 		new Window("Asteroids - Ares v1.2", this);
 	}
@@ -502,10 +495,6 @@ public class Game extends Canvas implements Runnable {
 		this.setMaximumSize(new Dimension(WIDTH, HEIGHT));
 	}
 	
-//	public void Fullscreen() {
-//		this.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-//	}
-	
 	public void run() {
 		this.requestFocus();
 		
@@ -609,7 +598,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private void drawLose(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Game.miniMenu, Game.WIDTH / 3 + 50, Game.HEIGHT / 2 - 75, Game.WIDTH / 3, Game.HEIGHT / 4, null);
+		g2.drawImage(Game.miniMenu, Game.WIDTH / 3, Game.HEIGHT / 3, Game.WIDTH / 3, Game.HEIGHT / 4, null);
 	}
 	
 	private void tookDamage(Graphics g) {
@@ -618,24 +607,41 @@ public class Game extends Canvas implements Runnable {
 		g2.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 	
-	private void drawPause(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(Game.miniMenu, Game.WIDTH / 3 + 50, Game.HEIGHT / 2 - 75, Game.WIDTH / 3, Game.HEIGHT / 4, null);
-	}
-	
-	
 	private void drawHealthBar(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		g2.setColor(Color.red);
 		if (!ships.isEmpty()) {
-			final int w = 10;
-			final int h = ships.get(0).getHealth() * 6 + 10;
-			final int x = WIDTH - (WIDTH / 50) + 7;
-			final int y = (HEIGHT / 2 - 181) + (130 - h);
+			int w = 11;
+			int h = ships.get(0).getHealth() * 7;
+			int x = WIDTH - (WIDTH / 61);
+			int y = (HEIGHT / 2 - 183) + (130 - h);
+			if (WIDTH >= 1920) {
+				w = 11;
+				h = ships.get(0).getHealth() * 7;
+				x = WIDTH - (WIDTH / 61);
+				y = (HEIGHT / 2 - 173) + (120 - h);
+			}
+			else if (WIDTH == 1366) {
+				w = 7;
+				h = ships.get(0).getHealth() * 5 - 1;
+				x = WIDTH - (WIDTH / 61);
+				y = (HEIGHT / 2 - 128) + (90 - h);
+			}
+			else if (WIDTH == 1600) {
+				w = 9;
+				h = ships.get(0).getHealth() * 5 + 17;
+				x = WIDTH - (WIDTH / 61);
+				y = (HEIGHT / 2 - 173) + (130 - h);
+			}
+			else {
+				w = 7;
+				h = ships.get(0).getHealth() * 5 - 1;
+				x = WIDTH - (WIDTH / 61);
+				y = (HEIGHT / 2 - 128) + (90 - h);
+			}
 			g2.fillRect(x, y, w, h);
 		}
-		
 	}
 
 	private void drawLeftUI(Graphics g) {
@@ -667,7 +673,6 @@ public class Game extends Canvas implements Runnable {
 				i--;
 				ParticleEffect impact = new ParticleEffect(projectile.getPos(), projectile.getRadius(), projectile.getHitFrame(), FRAME_TIME, 400);
 				particleEffects.add(impact);
-//				System.out.println(particleEffects.size());
 				addDebris(projectile);
 			} else if (!projectile.isAlive()) {
 				projectiles.remove(projectile);
@@ -775,7 +780,6 @@ public class Game extends Canvas implements Runnable {
 		for (Projectile projectile : projectiles) {
 			for (Asteroid asteroid : asteroids) {
 				if (asteroid.isColliding(projectile)) {
-//					System.out.println(particleEffects.size());
 					asteroid.resolveCollision(projectile);
 					if (projectile.isLaser()) {
 						addParticles(projectile);

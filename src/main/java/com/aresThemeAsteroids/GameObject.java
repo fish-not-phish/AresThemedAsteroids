@@ -40,20 +40,7 @@ public abstract class GameObject {
 		this.radius = radius;
 	}
 	
-	public void draw(Graphics g) {
-//		Graphics2D g2 = (Graphics2D) g;
-//		g2.setColor(color);
-//		if (getSprite() == null) {
-//			g2.fill(new Ellipse2D.Double(pos.getX() - radius, pos.getY() - radius, radius * 2, radius * 2));
-//		} else {
-//			double locationX = getSprite().getFrame().getWidth() / 2;
-//			double locationY = getSprite().getFrame().getHeight() / 2;
-//			AffineTransform tx = AffineTransform.getRotateInstance(vel.getAngle() + Math.PI / 2, locationX, locationY);
-//			AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-//			BufferedImage rotated = op.filter(getSprite().getFrame(), null);
-//			
-//			g2.drawImage(rotated, (int) (pos.getX() - radius), (int) (pos.getY() - radius), (int) (radius * 2), (int) (radius * 2), null);
-//		}	
+	public void draw(Graphics g) {	
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(color);
 		if (getSprite() == null) {
@@ -121,8 +108,6 @@ public abstract class GameObject {
 		pos.setX(Game.WIDTH + radius / 2 - (Game.WIDTH / 50));
 	}
 	
-	
-	// FIX THIS
 	private void checkBounds() {
 		if (isOutBoundsNorth()) {
 			resolveBoundsNorth();

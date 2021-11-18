@@ -26,7 +26,6 @@ public class FlakDrone extends GameObject {
 		health = Game.FLAK_DRONE_HEALTH;
 		hitSprite = new Sprite(Game.framesFlakDroneOverlay, Game.FRAME_TIME, sprite.getStartFrame());
 		lastHitTime = 0;
-		
 	}
 	
 	public boolean isInRange(GameObject other) {

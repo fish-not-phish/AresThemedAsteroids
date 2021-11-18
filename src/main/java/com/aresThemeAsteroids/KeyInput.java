@@ -16,13 +16,9 @@ public class KeyInput extends KeyAdapter {
 		return keys;
 	}
 	
-	public KeyInput() {
-		
-	}
+	public KeyInput() {}
 	
-	public void keyTyped(KeyEvent e) {
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 	
 	public void keyPressed(KeyEvent e) {
 		keys.add(e.getKeyCode());

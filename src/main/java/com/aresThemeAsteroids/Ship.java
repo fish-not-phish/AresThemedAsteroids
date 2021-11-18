@@ -55,7 +55,6 @@ public class Ship extends GameObject {
 	
 	public Ship(Set<Integer> keys, Set<Integer> processed, double radius, Frames frame, Frames overlay, int health, String name) {
 		super(new Vector2 (Game.WIDTH / 2, Game.HEIGHT / 2), Vector2.zero(), radius, Color.white, frame, Game.FRAME_TIME);
-//		-Math.PI / 2
 		lastHitTime = 0;
 		this.health =  health;
 		this.keys = keys;
@@ -84,10 +83,8 @@ public class Ship extends GameObject {
 		this.eleLaserLastFired = 0;
 		this.gunshotFireRate = 75;
 		this.gunshotLastFired = 0;
-		
 		this.lastFired = System.currentTimeMillis();
 	}
-
 	
 	@Override
 	public void draw(Graphics g) {
@@ -96,23 +93,11 @@ public class Ship extends GameObject {
 		if (sprite == null) {
 			g2.fill(new Ellipse2D.Double(pos.getX() - radius, pos.getY() - radius, radius * 2, radius * 2));
 		} else {
-//			BufferedImage image = sprite.getFrame();
 			BufferedImage image = getSprite().getFrame();
 
 			DrawTools.drawImageRotated(g2, image, pos.getX(), pos.getY(), direction.getAngle() + (Math.PI / 2));
 		}
 	}
-	
-	public void fire(ArrayList<Projectile> projectiles) {
-		if (System.currentTimeMillis() - lastFired > fireRate) {
-			for (int i = 0; i < 4; i++) {
-				
-//				spawnProjectile(projectiles);
-			}
-			lastFired = System.currentTimeMillis();
-		}
-	}
-	
 	
 	public void update(ArrayList<Ship> ships, ArrayList<Projectile> projectiles, ArrayList<Asteroid> asteroids, ArrayList<FlakDrone> flakDrones, ArrayList<Debris> debris, ArrayList<Particles> particles) {
 		super.update(ships, projectiles, asteroids, flakDrones, debris, particles);
@@ -123,28 +108,23 @@ public class Ship extends GameObject {
 				if (vel.length() > Game.SHIP_MAX_VELOCITY) {
 					vel = vel.unit().mul(Game.SHIP_MAX_VELOCITY);
 				}
-//				System.out.println("Vector is: " + vel.length());
 			}
+			
 			if (code == KeyEvent.VK_RIGHT) {
 				
 				direction = direction.rot(Game.SHIP_ROTATION);
 			}
+			
 			if (code == KeyEvent.VK_LEFT) {
 				
 				direction = direction.rot(-Game.SHIP_ROTATION);
 			}
+			
 			if (code == KeyEvent.VK_DOWN) {
-//				if (vel.length() > 0) {
-//					vel = vel.sub(direction);
-//					System.out.println("Vector is: " + vel.length());
-//				} else {
-					vel = Vector2.zero();
-//				}
-//				if (vel.length() > Game.SHIP_MAX_VELOCITY) {
-//					vel = vel.unit().mul(Game.SHIP_MAX_VELOCITY);
-//				}
+				vel = Vector2.zero();
 			}
 		}
+		
 		if (this.getName() == "Ele Cruiser") {
 			if (keys.contains(KeyEvent.VK_SPACE)) {
 				if (System.currentTimeMillis() - onasLastFired > onasFireRate) {
@@ -219,7 +199,6 @@ public class Ship extends GameObject {
 						projectiles.add(p1);
 						p.getFireSound().play();
 					}
-//					Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY), Game.NEUTRON_DURATION, this.getClass());
 					gunshotLastFired = System.currentTimeMillis();
 				}
 //				processed.add(KeyEvent.VK_SPACE);
@@ -273,7 +252,7 @@ public class Ship extends GameObject {
 	
 	public void lowHealth() throws IOException, LineUnavailableException {
 		if (getHealth() <= 8) {
-			Game.lowHealth.playInterval();
+//			find a way to play sound at an interval without sleeping a thread
 		}
 	}
 	
@@ -286,31 +265,14 @@ public class Ship extends GameObject {
 			Game.particleEffects.add(impact);
 			health -= p.getDamage();
 			p.setAlive(false);
-//			try {
-//				lowHealth();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (LineUnavailableException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 		}
+		
 		if (other instanceof Asteroid) {
 			GameObject.changePositions(this, other);
 			GameObject.changeVelocities(this, other, 1);
 			this.vel = vel.mul(0.25);
 			lastHitTime = System.currentTimeMillis();
 			health -= 1;
-//			try {
-//				lowHealth();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (LineUnavailableException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 		}
 	}
 	
@@ -321,6 +283,7 @@ public class Ship extends GameObject {
 	public boolean isAlive() {
 		return health > 0;
 	}
+	
 	public Sprite getSprite() {
 		if (System.currentTimeMillis() - lastHitTime < Game.ASTEROID_OVERLAY_DURATION) {
 			return hitSprite;
@@ -328,11 +291,9 @@ public class Ship extends GameObject {
 		return sprite;
 	}
 
-
 	public void setHealth(int health) {
 		this.health = health;
 	}
-
 
 	public String getName() {
 		return name;

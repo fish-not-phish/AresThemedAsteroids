@@ -8,18 +8,14 @@ public class Sprite {
 	private long frameTime;
 	private int startFrame;
 
-	
 	public Sprite(Frames frames, long frameTime, int startFrame) {
 		this.frames = frames;
 		this.frameTime = frameTime;
 		this.startFrame = startFrame;
-
-		
 		if (startFrame < 0) {
 			Random rand = new Random();
 			this.startFrame = rand.nextInt(frames.getFrames().size());
 		}
-//		System.out.println(frames.getFrames().size());
 	}
 	
 	public BufferedImage getFrame() {
@@ -38,13 +34,10 @@ public class Sprite {
 		if(currentFrame == 24) {
 			currentFrame = 0;
 		}
-//		System.out.println(currentFrame + ", Angle: " + angle);
 		return frames.getFrames().get(currentFrame);
-		
 	}
 	
 	public int getStartFrame() {
 		return startFrame;
 	}
-	
 }

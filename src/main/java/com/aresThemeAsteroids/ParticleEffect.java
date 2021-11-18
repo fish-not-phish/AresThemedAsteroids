@@ -17,7 +17,5 @@ public class ParticleEffect extends GameObject {
 		return startTime + duration >= System.currentTimeMillis();
 	}
 	
-	public void resolveCollision(GameObject other) {
-		
-	}
+	public void resolveCollision(GameObject other) {}
 }

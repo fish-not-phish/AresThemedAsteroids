@@ -4,9 +4,6 @@ import java.awt.Color;
 import tools.Vector2;
 
 public class ProjectileFactory {
-	public static Projectile createBullet(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
-		return new Projectile(pos, vel, Game.BULLET_RADIUS, 0.5, duration, 1, false, false, Game.framesBullet, Game.soundBulletFire, Game.soundAsteroidHit, Game.framesImpact, owner);
-	}
 	public static Projectile createMissle(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
 		return new Projectile(pos, vel, Game.MISSILE_RADIUS, Game.MISSLE_MASS, duration, 3, true, false, Game.framesMissile, Game.soundMissileFire, Game.soundMissileHit, Game.framesMissileExplosion, owner);
 	}
@@ -38,15 +35,15 @@ public class ProjectileFactory {
 		return new Projectile(pos, vel, Game.ELELASER_RADIUS, Game.ELELASER_MASS, Game.ELELASER_DURATION, 2, false, true, Game.framesEleLaser, Game.soundEleLaserFire, Game.soundAsteroidHit, Game.framesImpact, owner);
 	}
 	public static Projectile createGunsmoke1(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
-		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, 100, 2, false, true, Game.framesGunFire, Game.silence, Game.silence, Game.framesImpact, owner);
+		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, 100, 0, false, true, Game.framesGunFire, Game.silence, Game.silence, Game.framesImpact, owner);
 	}
 	public static Projectile createGunsmoke2(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
-		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, 100, 2, false, true, Game.framesGunFire, Game.silence, Game.silence, Game.framesImpact, owner);
+		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, 100, 0, false, true, Game.framesGunFire, Game.silence, Game.silence, Game.framesImpact, owner);
 	}
 	public static Projectile createGunshot1(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
-		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, Game.GUN_DURATION, 2, false, true, Game.framesGun, Game.soundGunshotFire, Game.soundRicochet1, Game.framesImpact, owner);
+		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, Game.GUN_DURATION, 1, false, true, Game.framesGun, Game.soundGunshotFire, Game.soundRicochet1, Game.framesImpact, owner);
 	}
 	public static Projectile createGunshot2(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
-		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, Game.GUN_DURATION, 2, false, true, Game.framesGun, Game.soundGunshotFire, Game.soundRicochet2, Game.framesImpact, owner);
+		return new Projectile(pos, vel, Game.GUN_RADIUS, Game.GUN_MASS, Game.GUN_DURATION, 1, false, true, Game.framesGun, Game.soundGunshotFire, Game.soundRicochet2, Game.framesImpact, owner);
 	}
 }

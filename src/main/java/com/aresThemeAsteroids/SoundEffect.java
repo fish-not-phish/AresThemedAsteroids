@@ -26,10 +26,6 @@ public class SoundEffect {
 		SoundTools.playSound(sound);
 	}
 	
-	public void playInterval() throws IOException, LineUnavailableException {
-		SoundTools.playSoundInterval(sound);
-	}
-	
 	public void playCont() throws IOException, UnsupportedAudioFileException {
 		try {
 			Clip clip = AudioSystem.getClip();

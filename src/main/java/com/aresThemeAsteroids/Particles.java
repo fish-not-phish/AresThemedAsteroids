@@ -19,8 +19,7 @@ public class Particles extends GameObject {
 		isAlive = true;
 	}
 	
-	public void resolveCollision(GameObject other) {
-	}
+	public void resolveCollision(GameObject other) {}
 	
 	public boolean isAlive() {
 		return isAlive && startTime + duration >= System.currentTimeMillis();

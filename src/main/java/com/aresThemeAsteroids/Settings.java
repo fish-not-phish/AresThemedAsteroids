@@ -7,67 +7,123 @@ import java.awt.Rectangle;
 
 public class Settings {
 	
-	public Rectangle shipHealth = new Rectangle(Game.WIDTH / 3 + 125, 515, 350, 50);
-	public Rectangle shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 650, 515, 50, 50);
-	public Rectangle shipHealthSub = new Rectangle(Game.WIDTH / 3 - 100, 515, 50, 50);
-	
-//	public Rectangle bigAstHealth = new Rectangle(Game.WIDTH / 3 + 80, 575, 450, 50);
-//	public Rectangle bigAstHealthAdd = new Rectangle(Game.WIDTH / 3 + 650, 575, 50, 50);
-//	public Rectangle bigAstHealthSub = new Rectangle(Game.WIDTH / 3 - 100, 575, 50, 50);
-//	
-//	public Rectangle medAstHealth = new Rectangle(Game.WIDTH / 3 + 80, 635, 450, 50);
-//	public Rectangle medAstHealthAdd = new Rectangle(Game.WIDTH / 3 + 650, 635, 50, 50);
-//	public Rectangle medAstHealthSub = new Rectangle(Game.WIDTH / 3 - 100, 635, 50, 50);
-//	
-//	public Rectangle smallAstHealth = new Rectangle(Game.WIDTH / 3 + 80, 695, 450, 50);
-//	public Rectangle smallAstHealthAdd = new Rectangle(Game.WIDTH / 3 + 650, 695, 50, 50);
-//	public Rectangle smallAstHealthSub = new Rectangle(Game.WIDTH / 3 - 100, 695, 50, 50);
-	
-	public Rectangle backButton = new Rectangle(Game.WIDTH / 3 - 100, 755, 800, 50);
+	public Rectangle shipHealth;
+	public Rectangle shipHealthAdd;
+	public Rectangle shipHealthSub;
+	public Rectangle backButton;
 
 	public void draw (Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
+		if (Game.WIDTH >= 1920) {
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 136, 551, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 692, 551, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 107, 551, 50, 50);
+			backButton = new Rectangle(Game.WIDTH / 3 - 107, 755, 850, 50);
+			
+			Graphics2D g2d = (Graphics2D) g;
+			
+			g.setColor(Color.black);
+			g.fillRect(Game.WIDTH / 3 - 107, 551, 850, 476);
+			
+			Font fnt0 = new Font("arial", Font.BOLD, 50);
+			g.setFont(fnt0);
+			g.setColor(Color.green);
+			
+			Font fnt1 = new Font("arial", Font.BOLD, 35);
+			g.setFont(fnt1);
+			
+			g.drawString("Player Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 40, shipHealth.y + 40);
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 		
-		g.setColor(Color.black);
-		g.fillRect(Game.WIDTH / 3 - 100, 515, 800, 450);
+			g.drawString("Back", backButton.x + 375, backButton.y + 40);
+			g2d.draw(backButton);
+		}
+		else if (Game.WIDTH == 1600) {
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 100, 459, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 571, 459, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 89, 459, 50, 50);
+			backButton = new Rectangle(Game.WIDTH / 3 - 89, 755, 709, 50);
+			
+			Graphics2D g2d = (Graphics2D) g;
+			
+			g.setColor(Color.black);
+			g.fillRect(Game.WIDTH / 3 - 89, 459, 709, 397);
+			
+			Font fnt0 = new Font("arial", Font.BOLD, 50);
+			g.setFont(fnt0);
+			g.setColor(Color.green);
+			
+			Font fnt1 = new Font("arial", Font.BOLD, 35);
+			g.setFont(fnt1);
+			
+			g.drawString("Player Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 40, shipHealth.y + 40);
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 		
-		Font fnt0 = new Font("arial", Font.BOLD, 50);
-		g.setFont(fnt0);
-		g.setColor(Color.green);
-//		g.drawString("Settings", Game.WIDTH / 3 + 145, 100);
+			g.drawString("Back", backButton.x + 320, backButton.y + 40);
+			g2d.draw(backButton);
+		}
+		else if (Game.WIDTH == 1366) {
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 55, 392, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 479, 392, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 76, 392, 50, 50);
+			backButton = new Rectangle(Game.WIDTH / 3 - 76, 550, 605, 50);
+			
+			Graphics2D g2d = (Graphics2D) g;
+			
+			g.setColor(Color.black);
+			g.fillRect(Game.WIDTH / 3 - 76, 392, 605, 338);
+			
+			Font fnt0 = new Font("arial", Font.BOLD, 50);
+			g.setFont(fnt0);
+			g.setColor(Color.green);
+			
+			Font fnt1 = new Font("arial", Font.BOLD, 35);
+			g.setFont(fnt1);
+			
+			g.drawString("Player Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 40, shipHealth.y + 40);
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 		
-		Font fnt1 = new Font("arial", Font.BOLD, 35);
-		g.setFont(fnt1);
+			g.drawString("Back", backButton.x + 270, backButton.y + 40);
+			g2d.draw(backButton);
+		}
+		else {
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 55, 392, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 479, 392, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 76, 392, 50, 50);
+			backButton = new Rectangle(Game.WIDTH / 3 - 76, 550, 605, 50);
+			
+			Graphics2D g2d = (Graphics2D) g;
+			
+			g.setColor(Color.black);
+			g.fillRect(Game.WIDTH / 3 - 76, 392, 605, 338);
+			
+			Font fnt0 = new Font("arial", Font.BOLD, 50);
+			g.setFont(fnt0);
+			g.setColor(Color.green);
+			
+			Font fnt1 = new Font("arial", Font.BOLD, 35);
+			g.setFont(fnt1);
+			
+			g.drawString("Player Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 40, shipHealth.y + 40);
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 		
-		g.drawString("Player Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 40, shipHealth.y + 40);
-		g2d.draw(shipHealth);
-		g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
-		g2d.draw(shipHealthAdd);
-		g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
-		g2d.draw(shipHealthSub);
-		
-//		g.drawString("Big Asteroid Health: " + Integer.toString(Game.BIG_AST_HEALTH), bigAstHealth.x + 35, bigAstHealth.y + 40);
-//		g2d.draw(bigAstHealth);
-//		g.drawString("+", bigAstHealthAdd.x + 15, bigAstHealthAdd.y + 40);
-//		g2d.draw(bigAstHealthAdd);
-//		g.drawString("-", bigAstHealthSub.x + 18, bigAstHealthSub.y + 35);
-//		g2d.draw(bigAstHealthSub);
-//		
-//		g.drawString("Med Asteroid Health: " + Integer.toString(Game.MED_AST_HEALTH), medAstHealth.x + 35, medAstHealth.y + 40);
-//		g2d.draw(medAstHealth);
-//		g.drawString("+", medAstHealthAdd.x + 15, medAstHealthAdd.y + 40);
-//		g2d.draw(medAstHealthAdd);
-//		g.drawString("-", medAstHealthSub.x + 18, medAstHealthSub.y + 35);
-//		g2d.draw(medAstHealthSub);
-//		
-//		g.drawString("Small Asteroid Health: " + Integer.toString(Game.SMALL_AST_HEALTH), smallAstHealth.x + 35, smallAstHealth.y + 40);
-//		g2d.draw(smallAstHealth);
-//		g.drawString("+", smallAstHealthAdd.x + 15, smallAstHealthAdd.y + 40);
-//		g2d.draw(smallAstHealthAdd);
-//		g.drawString("-", smallAstHealthSub.x + 18, smallAstHealthSub.y + 35);
-//		g2d.draw(smallAstHealthSub);
-//		
-		g.drawString("Back", backButton.x + 350, backButton.y + 40);
-		g2d.draw(backButton);
+			g.drawString("Back", backButton.x + 270, backButton.y + 40);
+			g2d.draw(backButton);
+		}
 	}
 }
