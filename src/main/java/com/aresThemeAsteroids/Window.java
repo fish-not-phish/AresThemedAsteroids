@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Window {
-	private static JDialog d; 
+	
 	public Window(String title, Game game) {
 		JFrame frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

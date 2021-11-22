@@ -20,14 +20,13 @@ public class MouseInput implements MouseListener {
 		// TODO Auto-generated method stub
 		int mx = e.getX();
 		int my = e.getY();
-		System.out.println("X: , " + mx + " Y: , " + my);
 		
 		if (Game.WIDTH >= 1920) {
 			if (Game.State == Game.STATE.MENU) {
 //				play
 				if (mx >= 533 && mx <= 1380) {
 					if (my >= 551 && my <= 601) {
-						Game.State = Game.STATE.GAME;
+						Game.State = Game.STATE.PREGAME;
 					}
 				}
 //				settings
@@ -77,21 +76,29 @@ public class MouseInput implements MouseListener {
 						i++;
 						if (i <= 3) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player); 
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 
 							}
@@ -109,21 +116,29 @@ public class MouseInput implements MouseListener {
 							i = 0;
 						} else if (i >= 0) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player);
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 			
 							}
@@ -141,13 +156,6 @@ public class MouseInput implements MouseListener {
 			if (Game.ships.isEmpty()) {
 				if (mx >= 705 && mx <= 1215) {
 					if (my >= 474 && my <= 513) {
-
-						Game.asteroids.clear();
-						for (int i = 0; i < 12; i++) {
-							Game.addAsteroid(0, 0, Game.WIDTH, Game.HEIGHT, Game.BIG_AST_RADIUS);
-						}
-						Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
-						Game.ships.add(player);
 						Game.State = Game.STATE.MENU;
 					}
 				}
@@ -158,7 +166,7 @@ public class MouseInput implements MouseListener {
 //				play
 				if (mx >= 443 && mx <= 1155) {
 					if (my >= 455 && my <= 505) {
-						Game.State = Game.STATE.GAME;
+						Game.State = Game.STATE.PREGAME;
 					}
 				}
 //				settings
@@ -208,21 +216,29 @@ public class MouseInput implements MouseListener {
 						i++;
 						if (i <= 3) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player); 
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 
 							}
@@ -240,21 +256,29 @@ public class MouseInput implements MouseListener {
 							i = 0;
 						} else if (i >= 0) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player);
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 			
 							}
@@ -272,13 +296,6 @@ public class MouseInput implements MouseListener {
 			if (Game.ships.isEmpty()) {
 				if (mx >= 588 && mx <= 1013) {
 					if (my >= 396 && my <= 427) {
-
-						Game.asteroids.clear();
-						for (int i = 0; i < 12; i++) {
-							Game.addAsteroid(0, 0, Game.WIDTH, Game.HEIGHT, Game.BIG_AST_RADIUS);
-						}
-						Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
-						Game.ships.add(player);
 						Game.State = Game.STATE.MENU;
 					}
 				}
@@ -289,7 +306,7 @@ public class MouseInput implements MouseListener {
 //				play
 				if (mx >= 378 && mx <= 986) {
 					if (my >= 392 && my <= 442) {
-						Game.State = Game.STATE.GAME;
+						Game.State = Game.STATE.PREGAME;
 					}
 				}
 //				settings
@@ -339,21 +356,29 @@ public class MouseInput implements MouseListener {
 						i++;
 						if (i <= 3) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player); 
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 
 							}
@@ -371,21 +396,29 @@ public class MouseInput implements MouseListener {
 							i = 0;
 						} else if (i >= 0) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player);
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 			
 							}
@@ -403,13 +436,6 @@ public class MouseInput implements MouseListener {
 			if (Game.ships.isEmpty()) {
 				if (mx >= 501 && mx <= 864) {
 					if (my >= 337 && my <= 364) {
-
-						Game.asteroids.clear();
-						for (int i = 0; i < 12; i++) {
-							Game.addAsteroid(0, 0, Game.WIDTH, Game.HEIGHT, Game.BIG_AST_RADIUS);
-						}
-						Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
-						Game.ships.add(player);
 						Game.State = Game.STATE.MENU;
 					}
 				}
@@ -470,21 +496,29 @@ public class MouseInput implements MouseListener {
 						i++;
 						if (i <= 3) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player); 
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 
 							}
@@ -502,21 +536,29 @@ public class MouseInput implements MouseListener {
 							i = 0;
 						} else if (i >= 0) {
 							if (i == 0) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
 								Game.ships.add(player);
 							} else if (i == 1) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createEscort(Game.input.getKeys(), Game.input.getProcessed(), Game.framesEscortShip, Game.framesEscortShipOverlay);
 								Game.ships.add(player);
 								
 							} else if (i == 2){
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createGaiHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesGaiHvdShip, Game.framesGaiHvdShip);
 								Game.ships.add(player); 
 								
 							} else if (i == 3) {
-								Game.ships.remove(0);
+								if (!Game.ships.isEmpty()) {
+									Game.ships.remove(0);
+								}
 								Ship player = ShipFactory.createIshHvd(Game.input.getKeys(), Game.input.getProcessed(), Game.framesIshHvdShip, Game.framesIshHvdShipOverlay);
 								Game.ships.add(player); 			
 							}
@@ -534,13 +576,6 @@ public class MouseInput implements MouseListener {
 			if (Game.ships.isEmpty()) {
 				if (mx >= 501 && mx <= 864) {
 					if (my >= 337 && my <= 364) {
-
-						Game.asteroids.clear();
-						for (int i = 0; i < 12; i++) {
-							Game.addAsteroid(0, 0, Game.WIDTH, Game.HEIGHT, Game.BIG_AST_RADIUS);
-						}
-						Ship player = ShipFactory.createEleCruiser(Game.input.getKeys(), Game.input.getProcessed(), Game.framesShip, Game.framesShipOverlay);
-						Game.ships.add(player);
 						Game.State = Game.STATE.MENU;
 					}
 				}

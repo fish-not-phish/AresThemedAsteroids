@@ -25,8 +25,6 @@ public class Ship extends GameObject {
 	private Set<Integer> keys;
 	private int health;
 	private Vector2 direction;
-	private long lastFired;
-	private long fireRate;
 	private long lastHitTime;
 	private Sprite hitSprite;
 	private Frames hitFrame;
@@ -83,7 +81,6 @@ public class Ship extends GameObject {
 		this.eleLaserLastFired = 0;
 		this.gunshotFireRate = 75;
 		this.gunshotLastFired = 0;
-		this.lastFired = System.currentTimeMillis();
 	}
 	
 	@Override
@@ -250,12 +247,6 @@ public class Ship extends GameObject {
 		}
 	}
 	
-	public void lowHealth() throws IOException, LineUnavailableException {
-		if (getHealth() <= 8) {
-//			find a way to play sound at an interval without sleeping a thread
-		}
-	}
-	
 	public void resolveCollision(GameObject other) {
 		if (other instanceof Projectile && ((Projectile) other).getOwner() != Ship.class) {
 			lastHitTime = System.currentTimeMillis();
@@ -265,6 +256,8 @@ public class Ship extends GameObject {
 			Game.particleEffects.add(impact);
 			health -= p.getDamage();
 			p.setAlive(false);
+			RectangleParticleEffect flash = new RectangleParticleEffect(new Vector2(Game.WIDTH / 2, Game.HEIGHT /2), Game.WIDTH / 2, Color.white, Game.WIDTH, Game.HEIGHT, Game.SCREEN_FLASH_DURATION);
+			Game.particleEffects.add(flash);
 		}
 		
 		if (other instanceof Asteroid) {
@@ -273,9 +266,11 @@ public class Ship extends GameObject {
 			this.vel = vel.mul(0.25);
 			lastHitTime = System.currentTimeMillis();
 			health -= 1;
+			RectangleParticleEffect flash = new RectangleParticleEffect(new Vector2(Game.WIDTH / 2, Game.HEIGHT /2), Game.WIDTH / 2, Color.white, Game.WIDTH, Game.HEIGHT, Game.SCREEN_FLASH_DURATION);
+			Game.particleEffects.add(flash);
 		}
 	}
-	
+
 	public int getHealth() {
 		return health;
 	}

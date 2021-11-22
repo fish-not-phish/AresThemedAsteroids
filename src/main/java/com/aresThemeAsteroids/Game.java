@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable {
 	private Settings settings;
 	private ChooseShip chooseShip;
 	public static final int UI_WIDTH = WIDTH / 10;
+	public static final int SCREEN_FLASH_DURATION = 1;
 	
 //	Ship settings
 	public static final double ELE_SHIP_RADIUS = 17;
@@ -37,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 	public static final double ISH_HVD_SHIP_RADIUS = 22;
 	
 	public static final double SHIP_MAX_VELOCITY = 4;
-	public static int SHIP_HEALTH = 20;
+	public static int SHIP_HEALTH = 2;
 	public static final double SHIP_THRUST = 0.05;
 	public static final double SHIP_ROTATION = 2 * Math.PI / 100;
 	public static String SHIP_NAME;
@@ -205,6 +206,7 @@ public class Game extends Canvas implements Runnable {
 	
 //	Music
 	public static SoundEffect music = new SoundEffect("aresMix");
+	public static SoundEffect klaxon = new SoundEffect("klaxon");
 
 	public static long startTime = System.currentTimeMillis();
 	public boolean running = false;
@@ -233,7 +235,8 @@ public class Game extends Canvas implements Runnable {
 		SETTINGS,
 		CHOOSE_SHIP,
 		LOSE,
-		GAME
+		GAME,
+		PREGAME
 	};
 	
 	public static STATE State = STATE.MENU;
@@ -290,14 +293,6 @@ public class Game extends Canvas implements Runnable {
 		
 		return image3;
 	}
-	
-	private void playMusic() {
-			try {
-				music.playCont();
-			} catch (IOException | UnsupportedAudioFileException e) {
-				e.printStackTrace();
-			}
-	}
 
 	private void initialize() {
 		File file = new File("./resources/sprites/background.png");
@@ -345,16 +340,11 @@ public class Game extends Canvas implements Runnable {
 		
 		Ship player = ShipFactory.createEleCruiser(input.getKeys(), input.getProcessed(), framesShip, framesShipOverlay);
 		ships.add(player);
-		
-		addFlakDrone(0, 0, Game.WIDTH, Game.HEIGHT, FLAK_DRONE_RADIUS);
-		// places asteroids on x and y coordinates
-		for (int i = 0; i < 12; i++) {
-			addAsteroid(0, 0, Game.WIDTH, Game.HEIGHT, BIG_AST_RADIUS);
-		}
-		playMusic();
+
+		music.playCont();
 	}
 	
-	public void addFlakDrone(double left, double top, double right, double bottom, double radius) {
+	private void addFlakDrone(double left, double top, double right, double bottom, double radius) {
 		double width = right - left;
 		double height = bottom - top;
 		double x = rand.nextDouble() * (width - 2 * radius) + radius + left;
@@ -582,6 +572,7 @@ public class Game extends Canvas implements Runnable {
 				drawLeftUI(g);
 				drawRightUI(g);
 				drawHealthBar(g);
+	
 		}
 		else if (State == STATE.MENU) {
 			menu.draw(g);
@@ -599,12 +590,6 @@ public class Game extends Canvas implements Runnable {
 	private void drawLose(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(Game.miniMenu, Game.WIDTH / 3, Game.HEIGHT / 3, Game.WIDTH / 3, Game.HEIGHT / 4, null);
-	}
-	
-	private void tookDamage(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.white);
-		g2.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 	
 	private void drawHealthBar(Graphics g) {
@@ -732,6 +717,19 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	private void update() {
+		if (State == STATE.PREGAME) {
+			asteroids.clear();
+			for (int i = 0; i < 12; i++) {
+				addAsteroid(0, 0, WIDTH, HEIGHT, BIG_AST_RADIUS);
+			}
+			flakDrones.clear();
+			addFlakDrone(0, 0, WIDTH, HEIGHT, FLAK_DRONE_RADIUS);
+			if (ships.isEmpty()) {
+				Ship player = ShipFactory.createEleCruiser(input.getKeys(), input.getProcessed(), framesShip, framesShipOverlay);
+				ships.add(player);
+			}
+			State = STATE.GAME;
+		}
 		if (State == STATE.GAME) {
 			for (FlakDrone flakDrone : flakDrones) {
 				flakDrone.update(ships, projectiles, asteroids, flakDrones, debris, particles);
@@ -754,6 +752,12 @@ public class Game extends Canvas implements Runnable {
 			for (Asteroid asteroid : asteroids) {
 				asteroid.update(ships, projectiles, asteroids, flakDrones, debris, particles);
 			}
+			if (!ships.isEmpty()) {
+				if (ships.get(0).getHealth() <= 5 && !klaxon.isPlaying()) {
+					klaxon.playCont();
+				}
+			}
+			
 		}
 
 //		All collision resolution	
@@ -807,6 +811,7 @@ public class Game extends Canvas implements Runnable {
 				ParticleEffect p = new ParticleEffect(ships.get(0).getPos(), ships.get(0).getRadius(), framesObjExplosion, FRAME_TIME, EXPLOSION_DURATION);
 				ships.remove(0);
 				particleEffects.add(p);
+				klaxon.stop();
 			}
 		}
 	}

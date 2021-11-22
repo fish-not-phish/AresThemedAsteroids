@@ -32,7 +32,7 @@ public class Menu {
 			Font fnt1 = new Font("arial", Font.BOLD, 35);
 			g.setFont(fnt1);
 			
-			g.drawString("Play", playButton.x + 381, playButton.y + 40);
+			g.drawString("Play", playButton.x + 385, playButton.y + 40);
 			g2d.draw(playButton);
 			
 			g.drawString("Settings", settingsButton.x + 361, settingsButton.y + 40);

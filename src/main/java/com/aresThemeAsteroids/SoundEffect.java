@@ -15,7 +15,8 @@ import tools.SoundTools;
 
 public class SoundEffect {
 	private File sound;
-	InputStream myAudio;
+	private Clip clip;
+	
 	
 	public SoundEffect(String name) {
 		String wav = "./resources/sounds/" + name + ".wav";
@@ -26,14 +27,26 @@ public class SoundEffect {
 		SoundTools.playSound(sound);
 	}
 	
-	public void playCont() throws IOException, UnsupportedAudioFileException {
+	public boolean isPlaying() {
+		return clip != null && clip.isRunning();
+	}
+	
+	public void playCont() {
 		try {
-			Clip clip = AudioSystem.getClip();
+			clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(sound));
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.start();
 		} catch (LineUnavailableException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
 		}
+	}
+	
+	public void stop() {
+		clip.stop();
 	}
 }

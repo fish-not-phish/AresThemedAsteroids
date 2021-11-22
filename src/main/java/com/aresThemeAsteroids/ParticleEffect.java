@@ -13,6 +13,12 @@ public class ParticleEffect extends GameObject {
 		startTime = System.currentTimeMillis();
 	}
 	
+	public ParticleEffect(Vector2 pos, double radius, Color color, long duration) {
+		super(pos, Vector2.zero(), radius, color, null, 0);
+		this.duration = duration;
+		startTime = System.currentTimeMillis();
+	}
+	
 	public boolean isAlive() {
 		return startTime + duration >= System.currentTimeMillis();
 	}
