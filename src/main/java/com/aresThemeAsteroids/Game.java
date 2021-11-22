@@ -232,7 +232,6 @@ public class Game extends Canvas implements Runnable {
 	
 	public static enum STATE {
 		MENU,
-		SETTINGS,
 		CHOOSE_SHIP,
 		LOSE,
 		GAME,
@@ -576,9 +575,6 @@ public class Game extends Canvas implements Runnable {
 		}
 		else if (State == STATE.MENU) {
 			menu.draw(g);
-		}
-		else if (State == STATE.SETTINGS) {
-			settings.draw(g);
 		}
 		else if (State == STATE.CHOOSE_SHIP) {
 			chooseShip.draw(g);

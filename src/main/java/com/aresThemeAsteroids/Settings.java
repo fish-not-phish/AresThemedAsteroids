@@ -7,10 +7,10 @@ import java.awt.Rectangle;
 
 public class Settings {
 	
-	public Rectangle shipHealth;
-	public Rectangle shipHealthAdd;
-	public Rectangle shipHealthSub;
-	public Rectangle backButton;
+	private Rectangle shipHealth;
+	private Rectangle shipHealthAdd;
+	private Rectangle shipHealthSub;
+	private Rectangle backButton;
 
 	public void draw (Graphics g) {
 		if (Game.WIDTH >= 1920) {

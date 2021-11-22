@@ -32,12 +32,6 @@ public class MouseInput implements MouseListener {
 //				settings
 				if (mx >= 533 && mx <= 1380) {
 					if (my >= 611 && my <= 661) {
-						Game.State = Game.STATE.SETTINGS;
-					}
-				}
-//				choose ship
-				if (mx >= 533 && mx <= 1380) {
-					if (my >= 671 && my <= 721) {
 						Game.State = Game.STATE.CHOOSE_SHIP;
 					}
 				}
@@ -49,26 +43,6 @@ public class MouseInput implements MouseListener {
 				}
 			}
 			
-			if (Game.State == Game.STATE.SETTINGS) {
-//				player add hp
-				if (mx >= 1330 && mx <= 1380) {
-					if (my >= 551 && my <= 601) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
-//				player minus hp
-				if (mx >= 533 && mx <= 583) {
-					if (my >= 551 && my <= 601) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
-//				back button
-				if (mx >= 533 && mx <= 1380) {
-					if (my >= 750 && my <= 800) {
-						Game.State = Game.STATE.MENU;
-					}
-				}
-			}
 			if (Game.State == Game.STATE.CHOOSE_SHIP) {
 //				next ship
 				if (mx >= 1330 && mx <= 1380) {
@@ -143,6 +117,21 @@ public class MouseInput implements MouseListener {
 								Game.ships.add(player); 			
 							}
 						}
+					}
+				}
+				
+//				player minus hp
+				if (mx >= 533 && mx <= 583) {
+					if (my >= 721 && my <= 771) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+						System.out.println(Game.ships.get(0).getHealth());
+					}
+				}
+//				player add hp
+				if (mx >= 1330 && mx <= 1380) {
+					if (my >= 721 && my <= 771) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+						System.out.println(Game.ships.get(0).getHealth());
 					}
 				}
 				
@@ -172,12 +161,6 @@ public class MouseInput implements MouseListener {
 //				settings
 				if (mx >= 443 && mx <= 1155) {
 					if (my >= 515 && my <= 565) {
-						Game.State = Game.STATE.SETTINGS;
-					}
-				}
-//				choose ship
-				if (mx >= 443 && mx <= 1155) {
-					if (my >= 575 && my <= 625) {
 						Game.State = Game.STATE.CHOOSE_SHIP;
 					}
 				}
@@ -185,27 +168,6 @@ public class MouseInput implements MouseListener {
 				if (mx >= 443 && mx <= 1155) {
 					if (my >= 635 && my <= 685) {
 						System.exit(1);
-					}
-				}
-			}
-			
-			if (Game.State == Game.STATE.SETTINGS) {
-//				player add hp
-				if (mx >= 1103 && mx <= 1153) {
-					if (my >= 459 && my <= 509) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
-//				player minus hp
-				if (mx >= 443 && mx <= 493) {
-					if (my >= 459 && my <= 509) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
-//				back button
-				if (mx >= 443 && mx <= 1153) {
-					if (my >= 750 && my <= 800) {
-						Game.State = Game.STATE.MENU;
 					}
 				}
 			}
@@ -286,9 +248,22 @@ public class MouseInput implements MouseListener {
 					}
 				}
 				
+//				player minus hp
+				if (mx >= 443 && mx <= 493) {
+					if (my >= 629 && my <= 679) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+					}
+				}
+//				player add hp
+				if (mx >= 1103 && mx <= 1153) {
+					if (my >= 629 && my <= 679) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+					}
+				}
+				
 //				back button
 				if (mx >= 443 && mx <= 1153) {
-					if (my >= 750 && my <= 800) {
+					if (my >= 755 && my <= 805) {
 						Game.State = Game.STATE.MENU;
 					}
 				}
@@ -312,12 +287,6 @@ public class MouseInput implements MouseListener {
 //				settings
 				if (mx >= 378 && mx <= 986) {
 					if (my >= 452 && my <= 502) {
-						Game.State = Game.STATE.SETTINGS;
-					}
-				}
-//				choose ship
-				if (mx >= 378 && mx <= 986) {
-					if (my >= 512 && my <= 562) {
 						Game.State = Game.STATE.CHOOSE_SHIP;
 					}
 				}
@@ -325,27 +294,6 @@ public class MouseInput implements MouseListener {
 				if (mx >= 378 && mx <= 986) {
 					if (my >= 572 && my <= 622) {
 						System.exit(1);
-					}
-				}
-			}
-			
-			if (Game.State == Game.STATE.SETTINGS) {
-//				player add hp
-				if (mx >= 935 && mx <= 985) {
-					if (my >= 390 && my <= 440) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
-//				player minus hp
-				if (mx >= 380 && mx <= 430) {
-					if (my >= 390 && my <= 440) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
-//				back button
-				if (mx >= 380 && mx <= 985) {
-					if (my >= 550 && my <= 600) {
-						Game.State = Game.STATE.MENU;
 					}
 				}
 			}
@@ -426,9 +374,22 @@ public class MouseInput implements MouseListener {
 					}
 				}
 				
+//				player minus hp
+				if (mx >= 380 && mx <= 430) {
+					if (my >= 562 && my <= 612) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+					}
+				}
+//				player add hp
+				if (mx >= 934 && mx <= 984) {
+					if (my >= 562 && my <= 612) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+					}
+				}
+				
 //				back button
 				if (mx >= 380 && mx <= 984) {
-					if (my >= 550 && my <= 600) {
+					if (my >= 672 && my <= 722) {
 						Game.State = Game.STATE.MENU;
 					}
 				}
@@ -452,12 +413,6 @@ public class MouseInput implements MouseListener {
 //				settings
 				if (mx >= 378 && mx <= 986) {
 					if (my >= 452 && my <= 502) {
-						Game.State = Game.STATE.SETTINGS;
-					}
-				}
-//				choose ship
-				if (mx >= 378 && mx <= 986) {
-					if (my >= 512 && my <= 562) {
 						Game.State = Game.STATE.CHOOSE_SHIP;
 					}
 				}
@@ -465,27 +420,6 @@ public class MouseInput implements MouseListener {
 				if (mx >= 378 && mx <= 986) {
 					if (my >= 572 && my <= 622) {
 						System.exit(1);
-					}
-				}
-			}
-			
-			if (Game.State == Game.STATE.SETTINGS) {
-//				player add hp
-				if (mx >= 935 && mx <= 985) {
-					if (my >= 390 && my <= 440) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
-//				player minus hp
-				if (mx >= 380 && mx <= 430) {
-					if (my >= 390 && my <= 440) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
-//				back button
-				if (mx >= 380 && mx <= 985) {
-					if (my >= 550 && my <= 600) {
-						Game.State = Game.STATE.MENU;
 					}
 				}
 			}
@@ -565,10 +499,22 @@ public class MouseInput implements MouseListener {
 						}
 					}
 				}
+//				player minus hp
+				if (mx >= 380 && mx <= 430) {
+					if (my >= 562 && my <= 612) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+					}
+				}
+//				player add hp
+				if (mx >= 934 && mx <= 984) {
+					if (my >= 562 && my <= 612) {
+						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+					}
+				}
 				
 //				back button
 				if (mx >= 380 && mx <= 984) {
-					if (my >= 550 && my <= 600) {
+					if (my >= 672 && my <= 722) {
 						Game.State = Game.STATE.MENU;
 					}
 				}

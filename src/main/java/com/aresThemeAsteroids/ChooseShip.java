@@ -13,12 +13,21 @@ public class ChooseShip {
 	public Rectangle previousShip;
 	public Rectangle backButton;
 	
+	public Rectangle shipHealth;
+	public Rectangle shipHealthAdd;
+	public Rectangle shipHealthSub;
+	
+	
 	public void draw (Graphics g) {
 		if (Game.WIDTH >= 1920) {
 			currentShip = new Rectangle(Game.WIDTH / 3 + 155, 551, 350, 50);
 			nextShip = new Rectangle(Game.WIDTH / 3 + 693, 551, 50, 50);
 			previousShip = new Rectangle(Game.WIDTH / 3 - 107, 551, 50, 50);
 			backButton = new Rectangle(Game.WIDTH / 3 - 107, 800, 850, 50);
+			
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 155, 721, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 693, 721, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 107, 721, 50, 50);
 			
 			Graphics2D g2d = (Graphics2D) g;
 			
@@ -41,6 +50,17 @@ public class ChooseShip {
 			
 			g.drawImage(Game.getShipImage(), Game.WIDTH / 3 + 230, 611, 200, 100, null, null);
 			
+			if (Game.ships.isEmpty()) {
+				g.drawString("Health: " + Game.SHIP_HEALTH, shipHealth.x + 90, shipHealth.y + 40);
+			} else {
+				g.drawString("Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 90, shipHealth.y + 40);
+			}
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
+			
 			g.drawString("Back", backButton.x + 390, backButton.y + 40);
 			g2d.draw(backButton);
 		}
@@ -49,6 +69,10 @@ public class ChooseShip {
 			nextShip = new Rectangle(Game.WIDTH / 3 + 571, 459, 50, 50);
 			previousShip = new Rectangle(Game.WIDTH / 3 - 89, 459, 50, 50);
 			backButton = new Rectangle(Game.WIDTH / 3 - 89, 755, 709, 50);
+			
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 100, 629, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 571, 629, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 89, 629, 50, 50);
 			
 			Graphics2D g2d = (Graphics2D) g;
 			
@@ -70,6 +94,16 @@ public class ChooseShip {
 			g2d.draw(previousShip);
 			
 			g.drawImage(Game.getShipImage(), Game.WIDTH / 3 + 185, 519, 200, 100, null, null);
+			if (Game.ships.isEmpty()) {
+				g.drawString("Health: " + Game.SHIP_HEALTH, shipHealth.x + 100, shipHealth.y + 40);
+			} else {
+				g.drawString("Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 100, shipHealth.y + 40);
+			}
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 			
 			g.drawString("Back", backButton.x + 320, backButton.y + 40);
 			g2d.draw(backButton);
@@ -78,7 +112,11 @@ public class ChooseShip {
 			currentShip = new Rectangle(Game.WIDTH / 3 + 55, 392, 350, 50);
 			nextShip = new Rectangle(Game.WIDTH / 3 + 479, 392, 50, 50);
 			previousShip = new Rectangle(Game.WIDTH / 3 - 76, 392, 50, 50);
-			backButton = new Rectangle(Game.WIDTH / 3 - 76, 550, 605, 50);
+			backButton = new Rectangle(Game.WIDTH / 3 - 76, 672, 605, 50);
+			
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 55, 562, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 479, 562, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 76, 562, 50, 50);
 			
 			Graphics2D g2d = (Graphics2D) g;
 			
@@ -100,6 +138,16 @@ public class ChooseShip {
 			g2d.draw(previousShip);
 			
 			g.drawImage(Game.getShipImage(), Game.WIDTH / 3 + 130, 452, 200, 100, null, null);
+			if (Game.ships.isEmpty()) {
+				g.drawString("Health: " + Game.SHIP_HEALTH, shipHealth.x + 90, shipHealth.y + 40);
+			} else {
+				g.drawString("Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 90, shipHealth.y + 40);
+			}
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 			
 			g.drawString("Back", backButton.x + 265, backButton.y + 40);
 			g2d.draw(backButton);
@@ -108,7 +156,11 @@ public class ChooseShip {
 			currentShip = new Rectangle(Game.WIDTH / 3 + 55, 392, 350, 50);
 			nextShip = new Rectangle(Game.WIDTH / 3 + 479, 392, 50, 50);
 			previousShip = new Rectangle(Game.WIDTH / 3 - 76, 392, 50, 50);
-			backButton = new Rectangle(Game.WIDTH / 3 - 76, 550, 605, 50);
+			backButton = new Rectangle(Game.WIDTH / 3 - 76, 672, 605, 50);
+			
+			shipHealth = new Rectangle(Game.WIDTH / 3 + 55, 562, 350, 50);
+			shipHealthAdd = new Rectangle(Game.WIDTH / 3 + 479, 562, 50, 50);
+			shipHealthSub = new Rectangle(Game.WIDTH / 3 - 76, 562, 50, 50);
 			
 			Graphics2D g2d = (Graphics2D) g;
 			
@@ -122,7 +174,7 @@ public class ChooseShip {
 			Font fnt1 = new Font("arial", Font.BOLD, 35);
 			g.setFont(fnt1);
 			
-			g.drawString(Game.SHIP_NAME, currentShip.x + 40, currentShip.y + 40);
+			g.drawString(Game.SHIP_NAME, currentShip.x + 80, currentShip.y + 40);
 			g2d.draw(currentShip);
 			g.drawString(">", nextShip.x + 15, nextShip.y + 40);
 			g2d.draw(nextShip);
@@ -130,6 +182,16 @@ public class ChooseShip {
 			g2d.draw(previousShip);
 			
 			g.drawImage(Game.getShipImage(), Game.WIDTH / 3 + 130, 452, 200, 100, null, null);
+			if (Game.ships.isEmpty()) {
+				g.drawString("Health: " + Game.SHIP_HEALTH, shipHealth.x + 90, shipHealth.y + 40);
+			} else {
+				g.drawString("Health: " + Game.ships.get(0).getHealth(), shipHealth.x + 90, shipHealth.y + 40);
+			}
+			g2d.draw(shipHealth);
+			g.drawString("+", shipHealthAdd.x + 15, shipHealthAdd.y + 40);
+			g2d.draw(shipHealthAdd);
+			g.drawString("-", shipHealthSub.x + 18, shipHealthSub.y + 35);
+			g2d.draw(shipHealthSub);
 			
 			g.drawString("Back", backButton.x + 265, backButton.y + 40);
 			g2d.draw(backButton);
