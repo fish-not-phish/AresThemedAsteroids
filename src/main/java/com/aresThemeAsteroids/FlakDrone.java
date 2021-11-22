@@ -59,7 +59,7 @@ public class FlakDrone extends GameObject {
 	}
 	
 	private void spawnProjectile(ArrayList<Projectile> projectiles) {
-		int projectile = rand.nextInt(3);
+		int projectile = rand.nextInt(5);
 		Projectile p = null;
 		if (projectile == 0) {
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
@@ -73,11 +73,11 @@ public class FlakDrone extends GameObject {
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
 			p = ProjectileFactory.createMissle(pos, vel, Game.MISSILE_DURATION, this.getClass());
 			p.getFireSound().play();
-		} else if (projectile == 1){
+		} else if (projectile == 3){
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
 			p = ProjectileFactory.createFlak(pos, vel, 750, this.getClass());
 			p.getFireSound().play();
-		} else if (projectile == 1){
+		} else if (projectile == 4){
 			Vector2 vel = new Vector2(-Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY, -Game.NEUTRON_VELOCITY, Game.NEUTRON_VELOCITY);
 			p = ProjectileFactory.createFlak(pos, vel, 750, this.getClass());
 			p.getFireSound().play();
