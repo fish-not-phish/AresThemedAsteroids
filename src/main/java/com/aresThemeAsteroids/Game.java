@@ -719,7 +719,7 @@ public class Game extends Canvas implements Runnable {
 				addAsteroid(0, 0, WIDTH, HEIGHT, BIG_AST_RADIUS);
 			}
 			flakDrones.clear();
-			addFlakDrone(0, 0, WIDTH, HEIGHT, FLAK_DRONE_RADIUS);
+			addFlakDrone(0, 0, WIDTH - 20, HEIGHT - 20, FLAK_DRONE_RADIUS);
 			if (ships.isEmpty()) {
 				Ship player = ShipFactory.createEleCruiser(input.getKeys(), input.getProcessed(), framesShip, framesShipOverlay);
 				ships.add(player);

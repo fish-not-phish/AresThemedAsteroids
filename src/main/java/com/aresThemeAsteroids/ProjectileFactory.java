@@ -29,7 +29,7 @@ public class ProjectileFactory {
 		return new Projectile(pos, vel, Game.G_LASER_RADIUS, Game.G_LASER_MASS, Game.G_LASER_DURATION, 2, false, true, Game.framesGLaser, Game.soundGLaserFire, Game.soundAsteroidHit, Game.framesImpact, owner);
 	}
 	public static Projectile createFlak(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
-		return new Projectile(pos, vel, Game.FLAK_RADIUS, Game.FLAK_MASS, Game.FLAK_DURATION, 2, false, false, Game.framesFlak, Game.silence, Game.soundFlak, Game.framesImpact, owner);
+		return new Projectile(pos, vel, Game.FLAK_RADIUS, Game.FLAK_MASS, Game.FLAK_DURATION, 4, false, false, Game.framesFlak, Game.silence, Game.soundFlak, Game.framesImpact, owner);
 	}
 	public static Projectile createEleLaser(Vector2 pos, Vector2 vel, long duration, Class<?> owner) {
 		return new Projectile(pos, vel, Game.ELELASER_RADIUS, Game.ELELASER_MASS, Game.ELELASER_DURATION, 2, false, true, Game.framesEleLaser, Game.soundEleLaserFire, Game.soundAsteroidHit, Game.framesImpact, owner);

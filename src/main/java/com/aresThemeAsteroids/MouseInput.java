@@ -121,19 +121,19 @@ public class MouseInput implements MouseListener {
 				}
 				
 //				player minus hp
-				if (mx >= 533 && mx <= 583) {
-					if (my >= 721 && my <= 771) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-						System.out.println(Game.ships.get(0).getHealth());
-					}
-				}
+//				if (mx >= 533 && mx <= 583) {
+//					if (my >= 721 && my <= 771) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+//						System.out.println(Game.ships.get(0).getHealth());
+//					}
+//				}
 //				player add hp
-				if (mx >= 1330 && mx <= 1380) {
-					if (my >= 721 && my <= 771) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-						System.out.println(Game.ships.get(0).getHealth());
-					}
-				}
+//				if (mx >= 1330 && mx <= 1380) {
+//					if (my >= 721 && my <= 771) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+//						System.out.println(Game.ships.get(0).getHealth());
+//					}
+//				}
 				
 //				back button
 				if (mx >= 533 && mx <= 1380) {
@@ -249,17 +249,17 @@ public class MouseInput implements MouseListener {
 				}
 				
 //				player minus hp
-				if (mx >= 443 && mx <= 493) {
-					if (my >= 629 && my <= 679) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
+//				if (mx >= 443 && mx <= 493) {
+//					if (my >= 629 && my <= 679) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+//					}
+//				}
 //				player add hp
-				if (mx >= 1103 && mx <= 1153) {
-					if (my >= 629 && my <= 679) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
+//				if (mx >= 1103 && mx <= 1153) {
+//					if (my >= 629 && my <= 679) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+//					}
+//				}
 				
 //				back button
 				if (mx >= 443 && mx <= 1153) {
@@ -375,17 +375,17 @@ public class MouseInput implements MouseListener {
 				}
 				
 //				player minus hp
-				if (mx >= 380 && mx <= 430) {
-					if (my >= 562 && my <= 612) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
+//				if (mx >= 380 && mx <= 430) {
+//					if (my >= 562 && my <= 612) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+//					}
+//				}
 //				player add hp
-				if (mx >= 934 && mx <= 984) {
-					if (my >= 562 && my <= 612) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
+//				if (mx >= 934 && mx <= 984) {
+//					if (my >= 562 && my <= 612) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+//					}
+//				}
 				
 //				back button
 				if (mx >= 380 && mx <= 984) {
@@ -500,17 +500,17 @@ public class MouseInput implements MouseListener {
 					}
 				}
 //				player minus hp
-				if (mx >= 380 && mx <= 430) {
-					if (my >= 562 && my <= 612) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
-					}
-				}
+//				if (mx >= 380 && mx <= 430) {
+//					if (my >= 562 && my <= 612) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() - 1);
+//					}
+//				}
 //				player add hp
-				if (mx >= 934 && mx <= 984) {
-					if (my >= 562 && my <= 612) {
-						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
-					}
-				}
+//				if (mx >= 934 && mx <= 984) {
+//					if (my >= 562 && my <= 612) {
+//						Game.ships.get(0).setHealth(Game.ships.get(0).getHealth() + 1);
+//					}
+//				}
 				
 //				back button
 				if (mx >= 380 && mx <= 984) {
