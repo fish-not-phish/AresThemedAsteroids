@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 	public static final double ISH_HVD_SHIP_RADIUS = 22;
 	
 	public static final double SHIP_MAX_VELOCITY = 4;
-	public static int SHIP_HEALTH = 2;
+	public static int SHIP_HEALTH = 20;
 	public static final double SHIP_THRUST = 0.05;
 	public static final double SHIP_ROTATION = 2 * Math.PI / 100;
 	public static String SHIP_NAME;
