@@ -29,6 +29,10 @@ public class DrawTools {
         g.fillOval(x, y, d, d);
     }
     
+    public static void fillRect(Graphics g, double width, double height, double posX, double posY) {
+    	g.fillRect(0, 0, (int) width, (int) height);
+    }
+    
     public static void drawImage(Graphics g, Image image, double centerx, double centery) {
         int x = (int) (centerx - image.getWidth(null));
         int y = (int) (centery - image.getHeight(null));
