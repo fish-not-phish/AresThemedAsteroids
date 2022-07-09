@@ -1,4 +1,4 @@
-package com.aresThemeAsteroids;
+package asteroids;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -118,7 +118,24 @@ public class Ship extends GameObject {
 			}
 			
 			if (code == KeyEvent.VK_DOWN) {
-				vel = Vector2.zero();
+//				temp fix for stopping slowly instead of instantaniously
+				if (vel != Vector2.zero()) {
+					if (vel.getX() > 0.00) {
+						vel.setX(vel.getX()-Game.SHIP_THRUST);
+					}
+					else if (vel.getX() < 0.00) {
+						vel.setX(vel.getX()+Game.SHIP_THRUST);
+					}
+					if (vel.getY() > 0.00) {
+						vel.setY(vel.getY()-Game.SHIP_THRUST);
+					}
+					else if (vel.getY() < 0.00) {
+						vel.setY(vel.getY()+Game.SHIP_THRUST);
+					}
+					if (((vel.getX() <= 0.05) && (vel.getX() >= -0.05)) && ((vel.getY() <= 0.05) && (vel.getY() >= -0.05))) {
+						vel = Vector2.zero();
+					}
+				}
 			}
 		}
 		
@@ -126,7 +143,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SPACE)) {
 				if (System.currentTimeMillis() - onasLastFired > onasFireRate) {
 			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createOnas(projectilePos, direction.mul(Game.ONAS_VELOCITY), Game.ONAS_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createOnas(projectilePos, direction.mul(Game.ONAS_VELOCITY).add(this.getVel()), Game.ONAS_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					onasLastFired = System.currentTimeMillis();
@@ -137,7 +154,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SHIFT)) {
 				if (System.currentTimeMillis() - eleLaserLastFired > eleLaserFireRate) {
 			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createEleLaser(projectilePos, direction.mul(Game.ELELASER_VELOCITY), Game.ELELASER_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createEleLaser(projectilePos, direction.mul(Game.ELELASER_VELOCITY).add(this.getVel()), Game.ELELASER_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					eleLaserLastFired = System.currentTimeMillis();
@@ -149,7 +166,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
 				if (System.currentTimeMillis() - inasaLastFired > inasaFireRate) {
 			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createInasa(projectilePos, direction.mul(Game.INASA_VELOCITY), Game.INASA_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createInasa(projectilePos, direction.mul(Game.INASA_VELOCITY).add(this.getVel()), Game.INASA_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					inasaLastFired = System.currentTimeMillis();
@@ -160,7 +177,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SHIFT) && !processed.contains(KeyEvent.VK_SHIFT)) {
 				if (System.currentTimeMillis() - gLaserLastFired > gLaserFireRate) {
 					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createGLaser(projectilePos, direction.mul(Game.G_LASER_VELOCITY), Game.G_LASER_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createGLaser(projectilePos, direction.mul(Game.G_LASER_VELOCITY).add(this.getVel()), Game.G_LASER_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					gLaserLastFired = System.currentTimeMillis();
@@ -172,7 +189,7 @@ public class Ship extends GameObject {
 				if (System.currentTimeMillis() - missleLastFired > missleFireRate) {
 //					Vector2 tempPos = new Vector2(pos.getX() + 20, pos.getY());
 					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY), Game.MISSILE_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY).add(this.getVel()), Game.MISSILE_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					missleLastFired = System.currentTimeMillis();
@@ -184,13 +201,13 @@ public class Ship extends GameObject {
 				if (System.currentTimeMillis() - gunshotLastFired > gunshotFireRate) {
 					Vector2 projectilePos = pos.add(direction.mul((sprite.getFrame().getHeight() / 2)  + 10));
 					if (ricochet == 0) {
-						Projectile p = ProjectileFactory.createGunshot1(projectilePos, direction.mul(Game.GUN_VELOCITY), Game.GUN_DURATION, this.getClass());
+						Projectile p = ProjectileFactory.createGunshot1(projectilePos, direction.mul(Game.GUN_VELOCITY).add(this.getVel()), Game.GUN_DURATION, this.getClass());
 						Projectile p1 = ProjectileFactory.createGunsmoke1(projectilePos, direction.mul(0.1), 1, this.getClass());
 						projectiles.add(p);
 						projectiles.add(p1);
 						p.getFireSound().play();
 					} else {
-						Projectile p = ProjectileFactory.createGunshot2(projectilePos, direction.mul(Game.GUN_VELOCITY), Game.GUN_DURATION, this.getClass());
+						Projectile p = ProjectileFactory.createGunshot2(projectilePos, direction.mul(Game.GUN_VELOCITY).add(this.getVel()), Game.GUN_DURATION, this.getClass());
 						Projectile p1 = ProjectileFactory.createGunsmoke2(projectilePos, direction.mul(1), 1, this.getClass());
 						projectiles.add(p);
 						projectiles.add(p1);
@@ -204,7 +221,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
 				if (System.currentTimeMillis() - neutronLastFired > neutronFireRate) {
 					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY), Game.NEUTRON_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createNeutron(projectilePos, direction.mul(Game.NEUTRON_VELOCITY).add(this.getVel()), Game.NEUTRON_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					neutronLastFired = System.currentTimeMillis();
@@ -215,7 +232,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SPACE) && !processed.contains(KeyEvent.VK_SPACE)) {
 				if (System.currentTimeMillis() - magnetoLastFired > magnetoFireRate) {
 			        Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createMagneto(projectilePos, direction.mul(Game.MAGNETO_VELOCITY), Game.MAGNETO_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createMagneto(projectilePos, direction.mul(Game.MAGNETO_VELOCITY).add(this.getVel()), Game.MAGNETO_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					magnetoLastFired = System.currentTimeMillis();
@@ -226,7 +243,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_C) && !processed.contains(KeyEvent.VK_C)) {
 				if (System.currentTimeMillis() - missleLastFired > missleFireRate) {
 					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY), Game.MISSILE_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createMissle(projectilePos, direction.mul(Game.MISSILE_VELOCITY).add(this.getVel()), Game.MISSILE_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					missleLastFired = System.currentTimeMillis();
@@ -237,7 +254,7 @@ public class Ship extends GameObject {
 			if (keys.contains(KeyEvent.VK_SHIFT) && !processed.contains(KeyEvent.VK_SHIFT)) {
 				if (System.currentTimeMillis() - lectroLastFired > lectroFireRate) {
 					Vector2 projectilePos = pos.add(direction.mul(sprite.getFrame().getHeight() / 2));
-					Projectile p = ProjectileFactory.createLectro(projectilePos, direction.mul(Game.LECTRO_VELOCITY), Game.LECTRO_DURATION, this.getClass());
+					Projectile p = ProjectileFactory.createLectro(projectilePos, direction.mul(Game.LECTRO_VELOCITY).add(this.getVel()), Game.LECTRO_DURATION, this.getClass());
 					projectiles.add(p);
 					p.getFireSound().play();
 					lectroLastFired = System.currentTimeMillis();
