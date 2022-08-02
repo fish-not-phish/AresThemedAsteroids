@@ -1,4 +1,4 @@
-package asteroids;
+package com.aresThemeAsteroids;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -30,6 +31,9 @@ public class Ship extends GameObject {
 	private Frames hitFrame;
 	private String name;
 	private int ricochet = 0;
+	
+//	test case to see how ship turns in increments
+	private final AtomicBoolean canShoot = new AtomicBoolean(true);
 	
 //	fire rates
 	private long missleFireRate;
@@ -109,7 +113,8 @@ public class Ship extends GameObject {
 			
 			if (code == KeyEvent.VK_RIGHT) {
 				
-				direction = direction.rot(Game.SHIP_ROTATION);
+					direction = direction.rot(Game.SHIP_ROTATION);
+				
 			}
 			
 			if (code == KeyEvent.VK_LEFT) {
@@ -310,4 +315,6 @@ public class Ship extends GameObject {
 	public String getName() {
 		return name;
 	}
+	
+	
 }
